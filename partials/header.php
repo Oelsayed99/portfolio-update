@@ -16,6 +16,11 @@
     
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <?php if (isset($_SESSION['admin_user_id']) && isset($_GET['admin_editor'])): ?>
+        <!-- Admin Panel Styles -->
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    <?php endif; ?>
 </head>
 <body class="<?= $_COOKIE['theme'] ?? 'dark' ?>-mode">
     <header id="site-header">
@@ -25,11 +30,11 @@
             </div>
             
             <ul class="nav-links" id="nav-links">
-                <li><a href="/" class="<?= ($active_page === 'home') ? 'active' : ''; ?>"><?= translate('nav_home') ?></a></li>
-                <li><a href="/projects" class="<?= ($active_page === 'projects') ? 'active' : ''; ?>"><?= translate('nav_projects') ?></a></li>
-                <li><a href="/about" class="<?= ($active_page === 'about') ? 'active' : ''; ?>"><?= translate('nav_about') ?></a></li>
-                <li><a href="/blog" class="<?= ($active_page === 'blog') ? 'active' : ''; ?>"><?= translate('nav_blog') ?></a></li>
-                <li><a href="/contact" class="<?= ($active_page === 'contact') ? 'active' : ''; ?>"><?= translate('nav_contact') ?></a></li>
+                <li><a href="/" class="<?= ($active_page === 'home') ? 'active' : ''; ?>"><?= t('nav_home') ?></a></li>
+                <li><a href="/projects" class="<?= ($active_page === 'projects') ? 'active' : ''; ?>"><?= t('nav_projects') ?></a></li>
+                <li><a href="/about" class="<?= ($active_page === 'about') ? 'active' : ''; ?>"><?= t('nav_about') ?></a></li>
+                <li><a href="/blog" class="<?= ($active_page === 'blog') ? 'active' : ''; ?>"><?= t('nav_blog') ?></a></li>
+                <li><a href="/contact" class="<?= ($active_page === 'contact') ? 'active' : ''; ?>"><?= t('nav_contact') ?></a></li>
             </ul>
 
             <div class="header-actions">

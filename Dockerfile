@@ -4,9 +4,8 @@ FROM php:8.2-apache
 # Enable Apache mod_rewrite for pretty URLs
 RUN a2enmod rewrite
 
-# Install necessary PHP extensions (if any)
-# For a simple site, the defaults are usually enough
-# RUN docker-php-ext-install pdo pdo_mysql
+# Install necessary PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Set the working directory to the web root
 WORKDIR /var/www/html

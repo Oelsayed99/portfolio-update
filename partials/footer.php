@@ -20,5 +20,10 @@
     
     <!-- Main JavaScript -->
     <script src="/assets/js/main.js"></script>
+
+    <?php if (isset($_SESSION['admin_user_id']) && isset($_GET['admin_editor'])): ?>
+        <!-- Admin Interaction Logic -->
+        <script src="/assets/js/admin.js"></script>
+    <?php endif; ?>
 </body>
 </html>

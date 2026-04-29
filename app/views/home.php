@@ -9,15 +9,15 @@
         </aside>
         <div class="hero-content">
             <h1 class="hero-name">
-                <span class="hero-greeting"><?= translate('hero_hello') ?></span>
+                <span class="hero-greeting"><?= t('hero_hello') ?></span>
                 <br>
                 <?= str_replace(' ', '<br>', translate('hero_name')) ?>
             </h1>
-            <h3 class="hero-title"><?= translate('hero_title') ?></h3>
-            <p class="hero-desc"><?= translate('hero_desc') ?></p>
+            <h3 class="hero-title"><?= t('hero_title') ?></h3>
+            <p class="hero-desc"><?= t('hero_desc') ?></p>
             <div class="hero-btns">
-                <a href="/contact" class="btn btn-primary" id="btn-hire"><?= translate('btn_hire') ?></a>
-                <a href="/projects" class="btn btn-outline" id="btn-projects"><?= translate('btn_projects') ?></a>
+                <a href="/contact" class="btn btn-primary" id="btn-hire"><?= t('btn_hire') ?></a>
+                <a href="/projects" class="btn btn-outline" id="btn-projects"><?= t('btn_projects') ?></a>
             </div>
         </div>
         <div class="hero-image-container">

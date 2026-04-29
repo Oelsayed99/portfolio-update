@@ -11,20 +11,20 @@
                     <img src="/assets/images/contact_portrait.png" alt="<?= translate('hero_name') ?>" class="contact-portrait">
                 </div>
                 <div class="contact-info">
-                    <h1 class="contact-heading"><?= translate('contact_heading') ?></h1>
-                    <p class="contact-subtitle"><?= translate('contact_subtitle') ?></p>
+                    <h1 class="contact-heading"><?= t('contact_heading') ?></h1>
+                    <p class="contact-subtitle"><?= t('contact_subtitle') ?></p>
                     <div class="contact-links">
                         <a href="mailto:<?= translate('contact_email') ?>" class="contact-link">
                             <i class="fas fa-envelope"></i>
-                            <span><?= translate('contact_email') ?></span>
+                            <span><?= t('contact_email') ?></span>
                         </a>
                         <a href="https://<?= translate('contact_github') ?>" target="_blank" class="contact-link">
                             <i class="fab fa-github"></i>
-                            <span><?= translate('contact_github') ?></span>
+                            <span><?= t('contact_github') ?></span>
                         </a>
                         <a href="https://<?= translate('contact_linkedin') ?>" target="_blank" class="contact-link">
                             <i class="fab fa-linkedin"></i>
-                            <span><?= translate('contact_linkedin') ?></span>
+                            <span><?= t('contact_linkedin') ?></span>
                         </a>
                     </div>
                 </div>

@@ -1,0 +1,12 @@
+{
+    "name": "omar/portfolio",
+    "description": "Portfolio Project",
+    "authors": [
+        {
+            "name": "Omar Elsayed"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
