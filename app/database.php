@@ -39,6 +39,40 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB");
 
+    // Create projects table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS projects (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        type ENUM('pro', 'live') NOT NULL,
+        title_en VARCHAR(255),
+        title_ar VARCHAR(255),
+        tech_en VARCHAR(255),
+        tech_ar VARCHAR(255),
+        description_en TEXT,
+        description_ar TEXT,
+        image VARCHAR(255),
+        link VARCHAR(255),
+        icons TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB");
+
+    // Create journey table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS journey (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        date_en VARCHAR(255),
+        date_ar VARCHAR(255),
+        title_en VARCHAR(255),
+        title_ar VARCHAR(255),
+        description_en TEXT,
+        description_ar TEXT,
+        tag_en VARCHAR(255),
+        tag_ar VARCHAR(255),
+        tag_type VARCHAR(50),
+        side ENUM('left', 'right') DEFAULT 'left',
+        image VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB");
+
+
     // Re-connect with DB name in DSN for the models
     $db = new PDO("mysql:host=$host;dbname=$name;charset=utf8mb4", $user, $pass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -92,8 +126,9 @@ try {
             ['contact_heading', 'CONTACT', 'اتصل بنا'],
             ['contact_subtitle', 'Get in touch', 'تواصل معنا'],
             ['contact_email', 'om.he.els@gmail.com', 'om.he.els@gmail.com'],
-            ['contact_github', 'github.com/omarelsayed', 'github.com/omarelsayed'],
-            ['contact_linkedin', 'linkedin.com/in/omarelsayed', 'linkedin.com/in/omarelsayed'],
+            ['contact_github', 'github.com/Oelsayed99', 'github.com/Oelsayed99'],
+            ['contact_linkedin', 'linkedin.com/in/omar-elsayed-1162ab1b0', 'linkedin.com/in/omar-elsayed-1162ab1b0'],
+
             ['form_name', 'Name', 'الاسم'],
             ['form_email', 'Email', 'البريد الإلكتروني'],
             ['form_message', 'Message', 'الرسالة'],
@@ -117,6 +152,40 @@ try {
         $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         $stmt->execute([$username, $email, $password]);
     }
+
+    // Seed Projects
+    $projCount = $db->query("SELECT COUNT(*) FROM projects")->fetchColumn();
+    if ($projCount == 0) {
+        $projects = [
+            ['pro', 'Server Management Dashboard', 'لوحة إدارة الخوادم', 'Linux, Docker, Kubernetes', 'لينكس، دوكر، كوبرنيتس', '', '', '', '', 'fab fa-linux, fab fa-docker, fas fa-dharmachakra, fas fa-chart-line'],
+            ['pro', 'Secure Webmail Client', 'عميل بريد إلكتروني آمن', 'React, Node.js, PostgreSQL', 'رياكت، نود جي اس، بوستجري اس كيو ال', '', '', '', '', 'fab fa-react, fab fa-node-js, fas fa-database, fas fa-shield-halved'],
+            ['pro', 'Enterprise CRM Platform', 'منصة CRM للمؤسسات', 'Angular, Python, AWS', 'أنجولار، بايثون، أمازون وورلد سيرفيسز', '', '', '', '', 'fab fa-angular, fab fa-python, fab fa-aws'],
+            ['live', 'Fashion Hub E-Commerce', 'متجر أزياء إلكتروني', '', '', 'Fashion Hub description en', 'وصف متجر أزياء إلكتروني', '/assets/images/proj_fashion.png', '#', ''],
+            ['live', 'Travel Booking Portal', 'بوابة حجز السفر', '', '', 'Travel Booking description en', 'وصف بوابة حجز السفر', '/assets/images/proj_travel.png', '#', ''],
+            ['live', 'AI Chatbot Application', 'تطبيق روبوت محادثة ذكي', '', '', 'AI Chatbot description en', 'وصف تطبيق روبوت محادثة ذكي', '/assets/images/proj_chatbot.png', '#', ''],
+            ['live', 'Data Visualization Dashboard', 'لوحة تصور البيانات', '', '', 'Data Visualization description en', 'وصف لوحة تصور البيانات', '/assets/images/proj_data.png', '#', '']
+        ];
+        $stmt = $db->prepare("INSERT INTO projects (type, title_en, title_ar, tech_en, tech_ar, description_en, description_ar, image, link, icons) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        foreach ($projects as $p) {
+            $stmt->execute($p);
+        }
+    }
+
+    // Seed Journey
+    $journeyCount = $db->query("SELECT COUNT(*) FROM journey")->fetchColumn();
+    if ($journeyCount == 0) {
+        $journey = [
+            ['2023', '2023', 'Launched "Apex Finance" Platform', 'إطلاق منصة "أبيكس فاينانس"', 'Apex Finance description en', 'وصف منصة أبيكس فاينانس', 'PROJECT', 'مشروع', 'project', 'left', '/assets/images/journey_apex.png'],
+            ['2022', '2022', 'Promoted to Senior Software Engineer', 'ترقية إلى مهندس برمجيات أول', 'Promotion description en', 'وصف الترقية', 'CAREER', 'مسيرة', 'career', 'right', ''],
+            ['2021', '2021', 'AWS Certified Solutions Architect', 'شهادة مهندس حلول معتمد من AWS', 'AWS Cert description en', 'وصف شهادة AWS', 'CERTIFICATION', 'شهادة', 'cert', 'left', ''],
+            ['2020', '2020', 'Machine Learning Specialization', 'تخصص في تعلم الآلة', 'ML Specialization description en', 'وصف تخصص تعلم الآلة', 'LEARNING', 'تعلم', 'learning', 'right', '']
+        ];
+        $stmt = $db->prepare("INSERT INTO journey (date_en, date_ar, title_en, title_ar, description_en, description_ar, tag_en, tag_ar, tag_type, side, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        foreach ($journey as $j) {
+            $stmt->execute($j);
+        }
+    }
+
 
 } catch (PDOException $e) {
     // If it's a connection error, it might be because the DB container isn't ready yet

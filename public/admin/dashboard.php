@@ -81,7 +81,10 @@ $transCount = Translation::count();
                 </div>
                 <div class="mode-badge">Editor Mode</div>
                 <a href="/admin/dashboard.php" class="admin-nav-link active">Editor</a>
+                <a href="/admin/projects-manage.php" class="admin-nav-link">Projects</a>
+                <a href="/admin/journey-manage.php" class="admin-nav-link">Journey</a>
                 <a href="/admin/users.php" class="admin-nav-link">Users</a>
+
             </div>
             
             <div class="nav-right">

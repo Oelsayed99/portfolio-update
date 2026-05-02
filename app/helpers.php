@@ -108,6 +108,25 @@ function send_reset_email($email, $reset_link) {
         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         return false;
     }
+}/**
+ * Handle File Uploads
+ */
+function handle_upload($file, $target_dir = 'assets/uploads/') {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return null;
+    }
+
+    $upload_path = dirname(__DIR__) . '/public/' . $target_dir;
+    if (!is_dir($upload_path)) {
+        mkdir($upload_path, 0777, true);
+    }
+
+    $filename = time() . '_' . basename($file['name']);
+    $target_file = $upload_path . $filename;
+
+    if (move_uploaded_file($file['tmp_name'], $target_file)) {
+        return '/' . $target_dir . $filename;
+    }
+
+    return null;
 }
-
-

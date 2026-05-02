@@ -11,7 +11,9 @@ spl_autoload_register(function ($class) {
 });
 
 require_once dirname(__DIR__, 2) . '/app/database.php';
+require_once dirname(__DIR__, 2) . '/app/helpers.php';
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
+
 
 
 // Auth Check Function
