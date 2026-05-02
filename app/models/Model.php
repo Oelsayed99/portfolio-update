@@ -17,7 +17,7 @@ abstract class Model
     protected static function connect()
     {
         if (self::$db === null) {
-            $host = getenv('DB_HOST') ?: 'db';
+            $host = getenv('DB_HOST') ?: 'localhost';
             $name = getenv('DB_NAME') ?: 'portfolio';
             $user = getenv('DB_USER') ?: 'root';
             $pass = getenv('DB_PASS') ?: 'root';

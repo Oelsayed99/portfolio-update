@@ -1,0 +1,45 @@
+services:
+  app:
+    build: .
+    container_name: portfolio_app
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - DB_HOST=db
+      - DB_NAME=portfolio
+      - DB_USER=portfolio_user
+      - DB_PASS=${DB_PASS:-StrongPassword123!}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - uploads_data:/var/www/html/public/assets/uploads
+      - ./.env:/var/www/html/.env:ro
+    command: >
+      sh -c "sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf &&
+             sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf &&
+             apache2-foreground"
+
+  db:
+    image: mysql:8.0
+    container_name: portfolio_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-SuperSecureRoot456!}
+      MYSQL_DATABASE: portfolio
+      MYSQL_USER: portfolio_user
+      MYSQL_PASSWORD: ${DB_PASS:-StrongPassword123!}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/portfolio_export.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASS:-SuperSecureRoot456!}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
+  uploads_data:
