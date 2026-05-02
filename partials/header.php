@@ -17,16 +17,17 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/assets/css/style.css">
     
-    <?php if (isset($_SESSION['admin_user_id']) && isset($_GET['admin_editor'])): ?>
+    <?php if (isset($_SESSION['admin_user_id']) && isset($_SESSION['admin_editor_active'])): ?>
         <!-- Admin Panel Styles -->
         <link rel="stylesheet" href="/assets/css/admin.css">
     <?php endif; ?>
+
 </head>
 <body class="<?= $_COOKIE['theme'] ?? 'dark' ?>-mode">
     <header id="site-header">
         <nav class="container">
             <div class="logo">
-                <a href="/"><?= translate('hero_name') ?></a>
+                <a href="/"><?= t('hero_name') ?></a>
             </div>
             
             <ul class="nav-links" id="nav-links">

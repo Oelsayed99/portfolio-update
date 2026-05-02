@@ -72,6 +72,16 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB");
 
+    // Create skills table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS skills (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        category VARCHAR(50) NOT NULL,
+        name_en VARCHAR(255) NOT NULL,
+        name_ar VARCHAR(255),
+        sort_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB");
+
 
     // Re-connect with DB name in DSN for the models
     $db = new PDO("mysql:host=$host;dbname=$name;charset=utf8mb4", $user, $pass);
@@ -186,6 +196,30 @@ try {
         }
     }
 
+    // Seed Skills
+    $skillCount = $db->query("SELECT COUNT(*) FROM skills")->fetchColumn();
+    if ($skillCount == 0) {
+        $skills = [
+            ['backend', 'PHP', 'PHP', 1],
+            ['backend', 'Laravel', 'Laravel', 2],
+            ['backend', 'Symfony', 'Symfony', 3],
+            ['backend', 'Node.js', 'Node.js', 4],
+            ['backend', 'Go', 'Go', 5],
+            ['frontend', 'JavaScript', 'JavaScript', 1],
+            ['frontend', 'React', 'React', 2],
+            ['frontend', 'Vue.js', 'Vue.js', 3],
+            ['frontend', 'HTML5/CSS3', 'HTML5/CSS3', 4],
+            ['database', 'SQL', 'SQL', 1],
+            ['database', 'MySQL', 'MySQL', 2],
+            ['database', 'PostgreSQL', 'PostgreSQL', 3],
+            ['database', 'Redis', 'Redis', 4],
+            ['database', 'MongoDB', 'MongoDB', 5],
+        ];
+        $stmt = $db->prepare("INSERT INTO skills (category, name_en, name_ar, sort_order) VALUES (?, ?, ?, ?)");
+        foreach ($skills as $s) {
+            $stmt->execute($s);
+        }
+    }
 
 } catch (PDOException $e) {
     // If it's a connection error, it might be because the DB container isn't ready yet

@@ -101,8 +101,11 @@ body.admin-body {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
     width: 350px;
+    max-height: 90vh;
+    overflow-y: auto;
     display: none;
 }
+
 
 .popup-header {
     font-weight: 700;
@@ -120,4 +123,97 @@ body.admin-body {
     background: #f4f4f7;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
+}
+
+/* ── Skill Management Controls ── */
+.skill-list-new li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2rem;
+}
+
+.skill-remove-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.skill-list-new li:hover .skill-remove-btn {
+    opacity: 1;
+}
+
+.skill-remove-btn:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.skill-add-row {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed rgba(168, 85, 247, 0.3);
+}
+
+.skill-add-input {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 6px;
+    background: rgba(168, 85, 247, 0.05);
+    color: inherit;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.skill-add-input:focus {
+    border-color: #a855f7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.15);
+}
+
+.skill-add-btn {
+    padding: 0.4rem 0.75rem;
+    background: #a855f7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.skill-add-btn:hover {
+    background: #9333ea;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+}
+
+.skill-add-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }

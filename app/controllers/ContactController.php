@@ -14,12 +14,19 @@ class ContactController extends Controller
 
     public function submit()
     {
-        // Simple form handling
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // In a real app, you'd process the form here
-            // For now, just simulate success
-            header('Location: /contact?success=1');
+            $name = $_POST['name'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $message = $_POST['message'] ?? '';
+
+            if ($name && $email && $message) {
+                send_contact_email($name, $email, $message);
+                header('Location: /contact?success=1');
+            } else {
+                header('Location: /contact?error=1');
+            }
             exit;
         }
     }
+
 }

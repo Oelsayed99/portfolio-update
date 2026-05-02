@@ -39,15 +39,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // Position popup
             popup.style.display = 'block';
             
-            // Ensure popup is within viewport
+            // Measure actual size
+            const rect = popup.getBoundingClientRect();
             let x = e.clientX;
             let y = e.clientY;
-            if (x + 350 > window.innerWidth) x = window.innerWidth - 370;
-            if (y + 300 > window.innerHeight) y = window.innerHeight - 320;
             
+            // Flip or shift if going off screen
+            if (x + rect.width > window.innerWidth) {
+                x = window.innerWidth - rect.width - 20;
+            }
+            if (y + rect.height > window.innerHeight) {
+                y = window.innerHeight - rect.height - 20;
+            }
+            
+            // Safety check for top/left
+            if (x < 10) x = 10;
+            if (y < 10) y = 10;
+
             popup.style.left = x + 'px';
             popup.style.top = y + 'px';
         }
+
     });
 
     // 3. Popup Actions

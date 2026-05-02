@@ -8,7 +8,11 @@ use app\models\Translation;
 // Get some stats
 $userCount = User::count();
 $transCount = Translation::count();
+
+// Enable Live Editor for this session
+$_SESSION['admin_editor_active'] = true;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,39 +92,26 @@ $transCount = Translation::count();
             </div>
             
             <div class="nav-right">
+                <div class="lang-switcher" style="margin-right: 1rem; font-size: 0.85rem;">
+                    <?php if (($_SESSION['lang'] ?? 'en') === 'en'): ?>
+                        <a href="/lang?lang=ar" class="admin-nav-link">العربية</a>
+                    <?php else: ?>
+                        <a href="/lang?lang=en" class="admin-nav-link">English</a>
+                    <?php endif; ?>
+                </div>
                 <span style="font-size: 0.85rem; color: #a1a1aa;">Logged in as <strong><?= $_SESSION['admin_username'] ?></strong></span>
                 <a href="/admin/logout.php" class="admin-btn" style="background: transparent; border: 1px solid #3f3f46; color: white; font-size: 0.8rem;">Logout</a>
             </div>
+
         </nav>
         
         <div class="iframe-container">
             <!-- We pass a query param to tell the app to enable the editor -->
-            <iframe src="/?admin_editor=1" id="site-iframe"></iframe>
+            <iframe src="/" id="site-iframe"></iframe>
+
         </div>
     </div>
 
-    <script>
-        // Optional: Handle link clicks inside iframe to keep them in the iframe with the editor param
-        const iframe = document.getElementById('site-iframe');
-        iframe.onload = function() {
-            try {
-                const iframeWin = iframe.contentWindow;
-                const iframeDoc = iframe.contentDocument || iframeWin.document;
-                
-                // Monitor clicks on links inside the iframe
-                iframeDoc.addEventListener('click', function(e) {
-                    const link = e.target.closest('a');
-                    if (link && link.href && link.href.startsWith(window.location.origin)) {
-                        e.preventDefault();
-                        const url = new URL(link.href);
-                        url.searchParams.set('admin_editor', '1');
-                        iframe.src = url.toString();
-                    }
-                }, true);
-            } catch (err) {
-                console.warn("Cross-origin or other error in iframe monitoring:", err);
-            }
-        };
-    </script>
+
 </body>
 </html>

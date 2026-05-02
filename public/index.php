@@ -23,6 +23,8 @@ session_start();
 // Include core files
 require_once APP_PATH . '/database.php';
 require_once APP_PATH . '/helpers.php';
+require_once BASE_PATH . '/vendor/autoload.php';
+
 
 // Simple Autoloader
 spl_autoload_register(function ($class) {

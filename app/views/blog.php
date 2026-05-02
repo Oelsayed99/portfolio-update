@@ -9,8 +9,8 @@ $lang = get_current_lang();
 <!-- ── JOURNEY HEADER ── -->
 <section class="journey-header" id="journey-header">
     <div class="container">
-        <h1 class="journey-heading"><?= translate('journey_heading') ?></h1>
-        <p class="journey-subtitle"><?= translate('journey_subtitle') ?></p>
+        <h1 class="journey-heading"><?= t('journey_heading') ?></h1>
+        <p class="journey-subtitle"><?= t('journey_subtitle') ?></p>
     </div>
 </section>
 

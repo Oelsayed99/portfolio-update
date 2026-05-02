@@ -19,7 +19,8 @@ function t($msgid) {
     
     // Check if we should show the editor
     $is_admin = isset($_SESSION['admin_user_id']);
-    $editor_active = isset($_GET['admin_editor']);
+    $editor_active = isset($_SESSION['admin_editor_active']);
+
 
     if ($is_admin && $editor_active) {
         $lang = $_SESSION['lang'] ?? $_COOKIE['lang'] ?? 'en';
@@ -108,7 +109,69 @@ function send_reset_email($email, $reset_link) {
         error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         return false;
     }
-}/**
+}
+
+/**
+ * Send Contact Form Email
+ */
+function send_contact_email($name, $email, $message) {
+    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+    try {
+        // Load .env if it exists
+        $envFile = dirname(__DIR__) . '/.env';
+        if (file_exists($envFile)) {
+            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($lines as $line) {
+                if (strpos(trim($line), '#') === 0) continue;
+                if (strpos($line, '=') === false) continue;
+                list($key, $value) = explode('=', $line, 2);
+                $_ENV[trim($key)] = trim($value);
+            }
+        }
+
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $_ENV['SMTP_USER'] ?? 'om.he.els@gmail.com';
+        $mail->Password   = $_ENV['SMTP_PASS'] ?? '';
+        $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = $_ENV['SMTP_PORT'] ?? 587;
+
+        // Recipients
+        $to = $_ENV['SMTP_USER'] ?? 'om.he.els@gmail.com';
+        $mail->setFrom($_ENV['SMTP_FROM'] ?? 'om.he.els@gmail.com', 'Portfolio Contact');
+        $mail->addAddress($to);
+        $mail->addReplyTo($email, $name);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = "New Contact Form Message: $name";
+        
+        $emailBody = "
+        <div style='font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;'>
+            <h2 style='color: #2563eb;'>New Message from Portfolio</h2>
+            <p><strong>Name:</strong> {$name}</p>
+            <p><strong>Email:</strong> {$email}</p>
+            <p style='margin-top: 20px;'><strong>Message:</strong></p>
+            <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #2563eb;'>
+                " . nl2br(htmlspecialchars($message)) . "
+            </div>
+        </div>
+        ";
+
+        $mail->Body = $emailBody;
+        $mail->AltBody = "New Message from Portfolio\nName: $name\nEmail: $email\n\nMessage:\n$message";
+
+        $mail->send();
+        return true;
+    } catch (\Exception $e) {
+        error_log("Contact email failed: {$mail->ErrorInfo}");
+        return false;
+    }
+}
+/**
  * Handle File Uploads
  */
 function handle_upload($file, $target_dir = 'assets/uploads/') {

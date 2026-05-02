@@ -59,7 +59,8 @@ $projects = Project::all();
     <div class="admin-container">
         <header class="admin-header">
             <h1>Project Management</h1>
-            <a href="/admin/dashboard.php" class="admin-btn">Back to Dashboard</a>
+            <a href="/admin/dashboard.php" class="admin-btn" target="_top">Back to Dashboard</a>
+
         </header>
 
         <?php if ($msg): ?>
@@ -149,8 +150,10 @@ $projects = Project::all();
                         <td><?= htmlspecialchars($p['title_en']) ?></td>
                         <td><?= $p['created_at'] ?></td>
                         <td>
+                            <a href="projects-edit.php?id=<?= $p['id'] ?>" class="admin-btn" style="background:#3b82f6; color:white; margin-right:5px;">Edit</a>
                             <a href="?delete=<?= $p['id'] ?>" class="admin-btn admin-btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

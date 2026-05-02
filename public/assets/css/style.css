@@ -640,8 +640,13 @@ body.light-mode .purple-glow {
     border-radius: 6px;
     padding: .3rem .7rem;
     width: fit-content;
-    margin-top: auto
 }
+
+.pro-card-footer {
+    margin-top: auto;
+    width: 100%;
+}
+
 
 .live-grid {
     display: grid;

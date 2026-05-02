@@ -10,15 +10,15 @@ $lang = get_current_lang();
 <!-- ── PROJECTS HEADER ── -->
 <section class="projects-header" id="projects-header">
     <div class="container">
-        <h1 class="projects-heading"><?= translate('projects_heading') ?></h1>
-        <p class="projects-subtitle"><?= translate('projects_subtitle') ?></p>
+        <h1 class="projects-heading"><?= t('projects_heading') ?></h1>
+        <p class="projects-subtitle"><?= t('projects_subtitle') ?></p>
     </div>
 </section>
 
 <!-- ── PROFESSIONAL SYSTEMS ── -->
 <section class="projects-section" id="professional-systems">
     <div class="container">
-        <h2 class="projects-section-title"><?= translate('projects_pro_title') ?></h2>
+        <h2 class="projects-section-title"><?= t('projects_pro_title') ?></h2>
         <div class="pro-grid">
             <?php foreach ($proProjects as $p): ?>
             <div class="pro-card">
@@ -60,8 +60,15 @@ $lang = get_current_lang();
                 <h3 class="pro-card-title"><?= $p['title_'.$lang] ?></h3>
 
                 <p class="pro-card-tech"><?= $p['tech_'.$lang] ?></p>
-                <span class="pro-card-badge"><?= translate('projects_restricted') ?></span>
+                <div class="pro-card-footer">
+                    <?php if (!empty($p['link'])): ?>
+                        <a href="<?= $p['link'] ?>" target="_blank" class="btn btn-accent btn-sm" style="margin-top: 1rem; width: 100%; text-align: center;"><?= t('btn_view_live') ?></a>
+                    <?php else: ?>
+                        <span class="pro-card-badge"><?= t('projects_restricted') ?></span>
+                    <?php endif; ?>
+                </div>
             </div>
+
             <?php endforeach; ?>
         </div>
     </div>
@@ -70,7 +77,7 @@ $lang = get_current_lang();
 <!-- ── LIVE PROJECTS ── -->
 <section class="projects-section" id="live-projects">
     <div class="container">
-        <h2 class="projects-section-title"><?= translate('projects_live_title') ?></h2>
+        <h2 class="projects-section-title"><?= t('projects_live_title') ?></h2>
         <div class="live-grid">
             <?php foreach ($liveProjects as $p): ?>
             <div class="live-card">
@@ -80,7 +87,7 @@ $lang = get_current_lang();
                 <div class="live-card-info">
                     <h3><?= $p['title_'.$lang] ?></h3>
                     <p><?= $p['description_'.$lang] ?></p>
-                    <a href="<?= $p['link'] ?>" class="btn btn-accent btn-sm"><?= translate('btn_view_live') ?></a>
+                    <a href="<?= $p['link'] ?>" class="btn btn-accent btn-sm"><?= t('btn_view_live') ?></a>
                 </div>
             </div>
             <?php endforeach; ?>

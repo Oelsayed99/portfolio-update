@@ -9,7 +9,12 @@ class Controller
         $lang = $_GET['lang'] ?? 'en';
         if (in_array($lang, ['en', 'ar'])) {
             $_SESSION['lang'] = $lang;
-            setcookie('lang', $lang, time() + (86400 * 30), "/"); // 30 days
+            setcookie('lang', $lang, [
+                'expires' => time() + (86400 * 30),
+                'path' => '/',
+                'samesite' => 'Lax'
+            ]);
+
         }
         
         $referrer = $_SERVER['HTTP_REFERER'] ?? '/';

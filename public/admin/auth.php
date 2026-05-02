@@ -26,6 +26,8 @@ if (!function_exists('auth_required')) {
     }
 }
 
+
+
 // CSRF Protection (Simplified)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['csrf_token']) && !isset($_SERVER['HTTP_X_CSRF_TOKEN'])) {
     // In a real app, verify CSRF token

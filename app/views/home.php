@@ -4,9 +4,10 @@
 <section class="hero-section" id="hero">
     <div class="container hero-container">
         <aside class="social-sidebar" id="social-sidebar">
-            <a href="https://github.com/omarelsayed" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/omarelsayed" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://<?= translate('contact_github') ?>" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://<?= translate('contact_linkedin') ?>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </aside>
+
         <div class="hero-content">
             <h1 class="hero-name">
                 <span class="hero-greeting"><?= t('hero_hello') ?></span>
