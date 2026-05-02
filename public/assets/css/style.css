@@ -1057,7 +1057,7 @@ footer {
 /* ═══ RTL ═══ */
 [dir="rtl"] {
     --font-main: 'Noto Kufi Arabic', sans-serif;
-    --font-heading: 'Handjet', cursive;
+    --font-heading: 'Noto Kufi Arabic', sans-serif;
 }
 
 
