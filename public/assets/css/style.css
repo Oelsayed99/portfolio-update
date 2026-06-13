@@ -1063,17 +1063,39 @@ footer {
 
 
 [dir="rtl"] .timeline::before {
-    left: 50%
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 [dir="rtl"] .timeline-left {
-    left: 0;
-    text-align: start
+    left: auto;
+    right: 50%;
+    text-align: start;
 }
 
 [dir="rtl"] .timeline-right {
-    left: 50%;
-    text-align: start
+    left: auto;
+    right: 0;
+    text-align: start;
+}
+
+@media(max-width:768px) {
+    [dir="rtl"] .timeline::before {
+        left: auto;
+        right: 20px;
+        transform: none;
+    }
+    
+    [dir="rtl"] .timeline-item {
+        left: auto !important;
+        right: 0 !important;
+    }
+    
+    [dir="rtl"] .timeline-left .timeline-dot,
+    [dir="rtl"] .timeline-right .timeline-dot {
+        right: 13px;
+        left: auto;
+    }
 }
 
 
