@@ -15,25 +15,32 @@ if (isset($_GET['delete'])) {
 
 // Handle Add
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_project'])) {
-    $image_path = '';
-    if (isset($_FILES['image_file'])) {
-        $image_path = handle_upload($_FILES['image_file']);
-    }
-
-    $data = [
-        'type' => $_POST['type'] ?? 'live',
-        'title_en' => $_POST['title_en'] ?? '',
-        'title_ar' => $_POST['title_ar'] ?? '',
-        'tech_en' => $_POST['tech_en'] ?? '',
-        'tech_ar' => $_POST['tech_ar'] ?? '',
-        'description_en' => $_POST['description_en'] ?? '',
-        'description_ar' => $_POST['description_ar'] ?? '',
-        'image' => $image_path ?: ($_POST['image_url'] ?? ''),
-        'link' => $_POST['link'] ?? '',
-        'icons' => $_POST['icons'] ?? ''
-    ];
-
     try {
+        $type = $_POST['type'] ?? 'live';
+        $image_path = '';
+        if (isset($_FILES['image_file'])) {
+            $image_path = handle_upload($_FILES['image_file']);
+        }
+
+        $image = $image_path ?: ($_POST['image_url'] ?? '');
+
+        if ($type === 'live' && empty($image)) {
+            throw new Exception("For live projects, an image upload or an image URL is required.");
+        }
+
+        $data = [
+            'type' => $type,
+            'title_en' => $_POST['title_en'] ?? '',
+            'title_ar' => $_POST['title_ar'] ?? '',
+            'tech_en' => $_POST['tech_en'] ?? '',
+            'tech_ar' => $_POST['tech_ar'] ?? '',
+            'description_en' => $_POST['description_en'] ?? '',
+            'description_ar' => $_POST['description_ar'] ?? '',
+            'image' => $image,
+            'link' => $_POST['link'] ?? '',
+            'icons' => $_POST['icons'] ?? ''
+        ];
+
         Project::create($data);
         $msg = 'Project added successfully.';
     } catch (Exception $e) {

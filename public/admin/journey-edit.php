@@ -18,28 +18,32 @@ if (!$entry) {
 $msg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_journey'])) {
-    $image_path = $entry['image'];
-    if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
-        $image_path = handle_upload($_FILES['image_file']);
-    } elseif (!empty($_POST['image_url'])) {
-        $image_path = $_POST['image_url'];
-    }
-
-    $data = [
-        'date_en' => $_POST['date_en'] ?? '',
-        'date_ar' => $_POST['date_ar'] ?? '',
-        'title_en' => $_POST['title_en'] ?? '',
-        'title_ar' => $_POST['title_ar'] ?? '',
-        'description_en' => $_POST['description_en'] ?? '',
-        'description_ar' => $_POST['description_ar'] ?? '',
-        'tag_en' => $_POST['tag_en'] ?? '',
-        'tag_ar' => $_POST['tag_ar'] ?? '',
-        'tag_type' => $_POST['tag_type'] ?? 'project',
-        'side' => $_POST['side'] ?? 'left',
-        'image' => $image_path
-    ];
-
     try {
+        $image_path = $entry['image'];
+        if (isset($_FILES['image_file'])) {
+            $uploaded_path = handle_upload($_FILES['image_file']);
+            if ($uploaded_path !== null) {
+                $image_path = $uploaded_path;
+            }
+        }
+        if (!empty($_POST['image_url'])) {
+            $image_path = $_POST['image_url'];
+        }
+
+        $data = [
+            'date_en' => $_POST['date_en'] ?? '',
+            'date_ar' => $_POST['date_ar'] ?? '',
+            'title_en' => $_POST['title_en'] ?? '',
+            'title_ar' => $_POST['title_ar'] ?? '',
+            'description_en' => $_POST['description_en'] ?? '',
+            'description_ar' => $_POST['description_ar'] ?? '',
+            'tag_en' => $_POST['tag_en'] ?? '',
+            'tag_ar' => $_POST['tag_ar'] ?? '',
+            'tag_type' => $_POST['tag_type'] ?? 'project',
+            'side' => $_POST['side'] ?? 'left',
+            'image' => $image_path
+        ];
+
         Journey::update($id, $data);
         $msg = 'Journey entry updated successfully.';
         $entry = Journey::find($id); // Refresh data

@@ -15,26 +15,26 @@ if (isset($_GET['delete'])) {
 
 // Handle Add
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_journey'])) {
-    $image_path = '';
-    if (isset($_FILES['image_file'])) {
-        $image_path = handle_upload($_FILES['image_file']);
-    }
-
-    $data = [
-        'date_en' => $_POST['date_en'] ?? '',
-        'date_ar' => $_POST['date_ar'] ?? '',
-        'title_en' => $_POST['title_en'] ?? '',
-        'title_ar' => $_POST['title_ar'] ?? '',
-        'description_en' => $_POST['description_en'] ?? '',
-        'description_ar' => $_POST['description_ar'] ?? '',
-        'tag_en' => $_POST['tag_en'] ?? '',
-        'tag_ar' => $_POST['tag_ar'] ?? '',
-        'tag_type' => $_POST['tag_type'] ?? 'project',
-        'side' => $_POST['side'] ?? 'left',
-        'image' => $image_path ?: ($_POST['image_url'] ?? '')
-    ];
-
     try {
+        $image_path = '';
+        if (isset($_FILES['image_file'])) {
+            $image_path = handle_upload($_FILES['image_file']);
+        }
+
+        $data = [
+            'date_en' => $_POST['date_en'] ?? '',
+            'date_ar' => $_POST['date_ar'] ?? '',
+            'title_en' => $_POST['title_en'] ?? '',
+            'title_ar' => $_POST['title_ar'] ?? '',
+            'description_en' => $_POST['description_en'] ?? '',
+            'description_ar' => $_POST['description_ar'] ?? '',
+            'tag_en' => $_POST['tag_en'] ?? '',
+            'tag_ar' => $_POST['tag_ar'] ?? '',
+            'tag_type' => $_POST['tag_type'] ?? 'project',
+            'side' => $_POST['side'] ?? 'left',
+            'image' => $image_path ?: ($_POST['image_url'] ?? '')
+        ];
+
         Journey::create($data);
         $msg = 'Journey entry added successfully.';
     } catch (Exception $e) {

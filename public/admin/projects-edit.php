@@ -18,27 +18,38 @@ if (!$project) {
 $msg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_project'])) {
-    $image_path = $project['image'];
-    if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
-        $image_path = handle_upload($_FILES['image_file']);
-    } elseif (!empty($_POST['image_url'])) {
-        $image_path = $_POST['image_url'];
-    }
-
-    $data = [
-        'type' => $_POST['type'] ?? $project['type'],
-        'title_en' => $_POST['title_en'] ?? '',
-        'title_ar' => $_POST['title_ar'] ?? '',
-        'tech_en' => $_POST['tech_en'] ?? '',
-        'tech_ar' => $_POST['tech_ar'] ?? '',
-        'description_en' => $_POST['description_en'] ?? '',
-        'description_ar' => $_POST['description_ar'] ?? '',
-        'image' => $image_path,
-        'link' => $_POST['link'] ?? '',
-        'icons' => $_POST['icons'] ?? ''
-    ];
-
     try {
+        $type = $_POST['type'] ?? $project['type'];
+        $image_path = $project['image'];
+
+        if (isset($_FILES['image_file'])) {
+            $uploaded_path = handle_upload($_FILES['image_file']);
+            if ($uploaded_path !== null) {
+                $image_path = $uploaded_path;
+            }
+        }
+
+        if (!empty($_POST['image_url'])) {
+            $image_path = $_POST['image_url'];
+        }
+
+        if ($type === 'live' && empty($image_path)) {
+            throw new Exception("For live projects, an image upload or an image URL is required.");
+        }
+
+        $data = [
+            'type' => $type,
+            'title_en' => $_POST['title_en'] ?? '',
+            'title_ar' => $_POST['title_ar'] ?? '',
+            'tech_en' => $_POST['tech_en'] ?? '',
+            'tech_ar' => $_POST['tech_ar'] ?? '',
+            'description_en' => $_POST['description_en'] ?? '',
+            'description_ar' => $_POST['description_ar'] ?? '',
+            'image' => $image_path,
+            'link' => $_POST['link'] ?? '',
+            'icons' => $_POST['icons'] ?? ''
+        ];
+
         Project::update($id, $data);
         $msg = 'Project updated successfully.';
         $project = Project::find($id); // Refresh data

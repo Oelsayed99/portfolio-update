@@ -175,13 +175,58 @@ function send_contact_email($name, $email, $message) {
  * Handle File Uploads
  */
 function handle_upload($file, $target_dir = 'assets/uploads/') {
-    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+    // If no file was uploaded at all, return null (it's optional)
+    if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
         return null;
     }
 
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        switch ($file['error']) {
+            case UPLOAD_ERR_INI_SIZE:
+                throw new Exception("The uploaded file exceeds the upload_max_filesize directive in php.ini.");
+            case UPLOAD_ERR_FORM_SIZE:
+                throw new Exception("The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.");
+            case UPLOAD_ERR_PARTIAL:
+                throw new Exception("The uploaded file was only partially uploaded.");
+            case UPLOAD_ERR_NO_TMP_DIR:
+                throw new Exception("Missing a temporary folder on the server.");
+            case UPLOAD_ERR_CANT_WRITE:
+                throw new Exception("Failed to write file to disk. Check disk space or permissions.");
+            case UPLOAD_ERR_EXTENSION:
+                throw new Exception("A PHP extension stopped the file upload.");
+            default:
+                throw new Exception("Unknown upload error (code: " . $file['error'] . ").");
+        }
+    }
+
     $upload_path = dirname(__DIR__) . '/public/' . $target_dir;
+    
+    // Check if the directory exists, try to create it
     if (!is_dir($upload_path)) {
-        mkdir($upload_path, 0777, true);
+        if (!mkdir($upload_path, 0777, true)) {
+            throw new Exception("Failed to create upload directory: " . htmlspecialchars($upload_path) . ". Please check parent directory permissions.");
+        }
+    }
+
+    // Check write permissions
+    if (!is_writable($upload_path)) {
+        throw new Exception("Upload directory is not writable: " . htmlspecialchars($upload_path) . ". Please check folder permissions on the server.");
+    }
+
+    // Security check: Validate file type
+    $mime_type = null;
+    if (function_exists('mime_content_type')) {
+        $mime_type = mime_content_type($file['tmp_name']);
+    } elseif (class_exists('finfo')) {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime_type = $finfo->file($file['tmp_name']);
+    }
+
+    if ($mime_type !== null) {
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+        if (!in_array($mime_type, $allowed_types)) {
+            throw new Exception("Invalid file type: " . htmlspecialchars($mime_type) . ". Only JPG, PNG, GIF, WEBP, and SVG are allowed.");
+        }
     }
 
     $filename = time() . '_' . basename($file['name']);
@@ -191,5 +236,5 @@ function handle_upload($file, $target_dir = 'assets/uploads/') {
         return '/' . $target_dir . $filename;
     }
 
-    return null;
+    throw new Exception("Failed to move uploaded file. Check destination permissions.");
 }
