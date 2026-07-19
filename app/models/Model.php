@@ -17,10 +17,10 @@ abstract class Model
     protected static function connect()
     {
         if (self::$db === null) {
-            $host = getenv('DB_HOST') ?: 'localhost';
-            $name = getenv('DB_NAME') ?: 'portfolio';
-            $user = getenv('DB_USER') ?: 'root';
-            $pass = getenv('DB_PASS') ?: 'root';
+            $host = getenv('DB_HOST') !== false ? getenv('DB_HOST') : 'localhost';
+            $name = getenv('DB_NAME') !== false ? getenv('DB_NAME') : 'portfolio';
+            $user = getenv('DB_USER') !== false ? getenv('DB_USER') : 'root';
+            $pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'root';
 
             try {
                 self::$db = new PDO("mysql:host=$host;dbname=$name;charset=utf8mb4", $user, $pass);

@@ -1,4 +1,4 @@
-<?php include '../partials/header.php'; ?>
+<?php include PARTIAL_PATH . '/header.php'; ?>
 
 <!-- ── HERO SECTION ── -->
 <section class="hero-section" id="hero">
@@ -31,4 +31,4 @@
     </div>
 </section>
 
-<?php include '../partials/footer.php'; ?>
+<?php include PARTIAL_PATH . '/footer.php'; ?>

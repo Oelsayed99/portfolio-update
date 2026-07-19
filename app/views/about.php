@@ -1,5 +1,5 @@
 <?php 
-include '../partials/header.php'; 
+include PARTIAL_PATH . '/header.php'; 
 use app\models\Skill;
 
 $lang = get_current_lang();
@@ -11,6 +11,7 @@ $categories = [
     'backend' => 'skill_backend',
     'frontend' => 'skill_frontend',
     'database' => 'skill_database',
+    'devops' => 'skill_devops',
 ];
 ?>
 
@@ -138,4 +139,4 @@ async function removeSkill(id, btn) {
 </script>
 <?php endif; ?>
 
-<?php include '../partials/footer.php'; ?>
+<?php include PARTIAL_PATH . '/footer.php'; ?>

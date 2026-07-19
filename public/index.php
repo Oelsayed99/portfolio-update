@@ -1,4 +1,12 @@
 <?php
+// If running under built-in web server and the file exists, serve it directly
+if (php_sapi_name() === 'cli-server') {
+    $filePath = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    if (is_file($filePath)) {
+        return false;
+    }
+}
+
 header('Content-Type: text/html; charset=UTF-8');
 
 /**
@@ -51,4 +59,8 @@ $router->add('lang', 'app\controllers\Controller', 'switchLang');
 
 // Dispatch
 $url = $_GET['url'] ?? '';
+if (empty($url)) {
+    $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $url = trim($requestUri, '/');
+}
 $router->dispatch($url);

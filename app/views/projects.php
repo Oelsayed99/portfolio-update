@@ -1,5 +1,5 @@
 <?php 
-include '../partials/header.php'; 
+include PARTIAL_PATH . '/header.php'; 
 use app\models\Project;
 
 $proProjects = Project::getByType('pro');
@@ -96,4 +96,4 @@ $lang = get_current_lang();
 </section>
 
 
-<?php include '../partials/footer.php'; ?>
+<?php include PARTIAL_PATH . '/footer.php'; ?>

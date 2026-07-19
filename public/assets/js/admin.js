@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let activeElement = null;
     let currentMsgId = '';
     let currentLang = '';
+    let lastOpenTime = 0;
 
     // 2. Right-click Handler
     document.addEventListener('contextmenu', function(e) {
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Position popup
             popup.style.display = 'block';
+            lastOpenTime = Date.now();
             
             // Measure actual size
             const rect = popup.getBoundingClientRect();
@@ -104,6 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close on click outside
     document.addEventListener('click', (e) => {
+        if (Date.now() - lastOpenTime < 150) {
+            return;
+        }
         if (!popup.contains(e.target) && popup.style.display === 'block') {
             popup.style.display = 'none';
         }

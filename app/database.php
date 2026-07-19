@@ -23,10 +23,10 @@ if (file_exists($envFile)) {
     }
 }
 
-$host = getenv('DB_HOST') ?: 'localhost';
-$name = getenv('DB_NAME') ?: 'portfolio';
-$user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: 'root';
+$host = getenv('DB_HOST') !== false ? getenv('DB_HOST') : 'localhost';
+$name = getenv('DB_NAME') !== false ? getenv('DB_NAME') : 'portfolio';
+$user = getenv('DB_USER') !== false ? getenv('DB_USER') : 'root';
+$pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'root';
 
 try {
     // Initial connection to ensure DB exists and create tables
@@ -132,6 +132,7 @@ try {
             ['skill_backend', 'Backend', 'الخلفية'],
             ['skill_frontend', 'Frontend', 'الواجهة'],
             ['skill_database', 'Database', 'قواعد البيانات'],
+            ['skill_devops', 'DevOps', 'ديف أوبس'],
             ['projects_heading', 'Portfolio Projects', 'مشاريع المحفظة'],
             ['projects_subtitle', 'Exploring a range of professional and live software engineering work.', 'استكشاف مجموعة من الأعمال الهندسية البرمجية المهنية والحية.'],
             ['projects_pro_title', 'Professional Systems', 'الأنظمة الاحترافية'],
@@ -231,6 +232,13 @@ try {
             ['database', 'PostgreSQL', 'PostgreSQL', 3],
             ['database', 'Redis', 'Redis', 4],
             ['database', 'MongoDB', 'MongoDB', 5],
+            ['devops', 'Docker', 'Docker', 1],
+            ['devops', 'Linux', 'Linux', 2],
+            ['devops', 'Git', 'Git', 3],
+            ['devops', 'GitHub', 'GitHub', 4],
+            ['devops', 'VPS Deployment', 'VPS Deployment', 5],
+            ['devops', 'Cloudflare', 'Cloudflare', 6],
+            ['devops', 'Nginx/OpenLiteSpeed', 'Nginx/OpenLiteSpeed', 7],
         ];
         $stmt = $db->prepare("INSERT INTO skills (category, name_en, name_ar, sort_order) VALUES (?, ?, ?, ?)");
         foreach ($skills as $s) {

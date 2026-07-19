@@ -1,4 +1,4 @@
-<?php include '../partials/header.php'; ?>
+<?php include PARTIAL_PATH . '/header.php'; ?>
 
 <!-- ── CONTACT SECTION ── -->
 <section class="contact-section" id="contact">
@@ -58,4 +58,4 @@
     </div>
 </section>
 
-<?php include '../partials/footer.php'; ?>
+<?php include PARTIAL_PATH . '/footer.php'; ?>
