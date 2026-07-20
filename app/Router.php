@@ -25,23 +25,30 @@ class Router
         // Remove trailing slashes and sanitize
         $url = trim($url, '/');
 
-        if (array_key_exists($url, $this->routes)) {
-            $controllerName = $this->routes[$url]['controller'];
-            $action = $this->routes[$url]['action'];
+        foreach ($this->routes as $routeUrl => $routeData) {
+            $pattern = preg_replace('/:[a-zA-Z0-9_]+/', '([^/]+)', $routeUrl);
+            $pattern = '#^' . $pattern . '$#';
 
-            if (class_exists($controllerName)) {
-                $controller = new $controllerName();
-                if (method_exists($controller, $action)) {
-                    $controller->$action();
+            if (preg_match($pattern, $url, $matches)) {
+                array_shift($matches);
+                $controllerName = $routeData['controller'];
+                $action = $routeData['action'];
+
+                if (class_exists($controllerName)) {
+                    $controller = new $controllerName();
+                    if (method_exists($controller, $action)) {
+                        call_user_func_array([$controller, $action], $matches);
+                        return;
+                    } else {
+                        $this->abort(404, "Action '$action' not found in controller '$controllerName'");
+                    }
                 } else {
-                    $this->abort(404, "Action '$action' not found in controller '$controllerName'");
+                    $this->abort(404, "Controller '$controllerName' not found");
                 }
-            } else {
-                $this->abort(404, "Controller '$controllerName' not found");
             }
-        } else {
-            $this->abort(404, "Route '$url' not found");
         }
+
+        $this->abort(404, "Route '$url' not found");
     }
 
     protected function abort($code, $message = "")

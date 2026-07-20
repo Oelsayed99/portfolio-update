@@ -1,9 +1,15 @@
 <?php
 // If running under built-in web server and the file exists, serve it directly
 if (php_sapi_name() === 'cli-server') {
-    $filePath = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    if (is_file($filePath)) {
-        return false;
+    $path = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    if ($path !== '/') {
+        $filePath = __DIR__ . $path;
+        if (is_dir($filePath)) {
+            $filePath = rtrim($filePath, '/') . '/index.php';
+        }
+        if (is_file($filePath)) {
+            return false;
+        }
     }
 }
 
@@ -52,6 +58,7 @@ $router = new app\Router();
 $router->add('', 'app\controllers\HomeController', 'index');
 $router->add('about', 'app\controllers\AboutController', 'index');
 $router->add('projects', 'app\controllers\ProjectController', 'index');
+$router->add('projects/:slug', 'app\controllers\ProjectController', 'detail');
 $router->add('blog', 'app\controllers\BlogController', 'index');
 $router->add('contact', 'app\controllers\ContactController', 'index');
 $router->add('contact/submit', 'app\controllers\ContactController', 'submit');

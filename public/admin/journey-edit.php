@@ -1,6 +1,5 @@
 <?php
-require_once 'auth.php';
-auth_required();
+require_once 'layout.php';
 
 use app\models\Journey;
 
@@ -51,23 +50,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_journey'])) {
         $msg = 'Error updating entry: ' . $e->getMessage();
     }
 }
+
+admin_header("Edit Journey Entry", "journey");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Journey Entry</title>
-    <link rel="stylesheet" href="/assets/css/admin.css">
-    <style>
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    </style>
-</head>
-<body class="admin-body">
-    <div class="admin-container">
-        <header class="admin-header">
-            <h1>Edit Journey Entry</h1>
-            <a href="/admin/journey-manage.php" class="admin-btn">Back to List</a>
-        </header>
+
+<style>
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media(max-width:768px) {
+        .form-grid { grid-template-columns: 1fr; }
+    }
+</style>
 
         <?php if ($msg): ?>
             <p style="padding:1rem; background:#dcfce7; color:#166534; border-radius:8px;"><?= $msg ?></p>
@@ -140,7 +132,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_journey'])) {
                 </div>
                 <button type="submit" name="update_journey" class="admin-btn admin-btn-primary" style="margin-top:1rem">Update Entry</button>
             </form>
-        </div>
     </div>
-</body>
-</html>
+<?php admin_footer(); ?>

@@ -199,6 +199,7 @@ function handle_upload($file, $target_dir = 'assets/uploads/') {
         }
     }
 
+    $target_dir = 'assets/uploads/';
     $upload_path = dirname(__DIR__) . '/public/' . $target_dir;
     
     // Check if the directory exists, try to create it
@@ -223,9 +224,12 @@ function handle_upload($file, $target_dir = 'assets/uploads/') {
     }
 
     if ($mime_type !== null) {
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+        $allowed_types = [
+            'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
+            'video/mp4', 'video/quicktime', 'application/pdf'
+        ];
         if (!in_array($mime_type, $allowed_types)) {
-            throw new Exception("Invalid file type: " . htmlspecialchars($mime_type) . ". Only JPG, PNG, GIF, WEBP, and SVG are allowed.");
+            throw new Exception("Invalid file type: " . htmlspecialchars($mime_type) . ". Allowed types: JPG, PNG, GIF, WEBP, SVG, MP4, MOV, and PDF.");
         }
     }
 

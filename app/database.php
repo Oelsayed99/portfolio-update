@@ -34,7 +34,12 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->exec("SET NAMES utf8mb4");
     $pdo->exec("CREATE DATABASE IF NOT EXISTS `$name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-    $pdo->exec("USE `$name` "); // Just to be sure, although DSN usually handles it
+    $pdo->exec("USE `$name` ");
+
+    // Check if tables already exist to control seeding
+    $shouldSeedProjects = !$pdo->query("SHOW TABLES LIKE 'projects'")->fetch();
+    $shouldSeedJourney = !$pdo->query("SHOW TABLES LIKE 'journey'")->fetch();
+    $shouldSeedSkills = !$pdo->query("SHOW TABLES LIKE 'skills'")->fetch();
 
     // Create translations table
     $pdo->exec("CREATE TABLE IF NOT EXISTS translations (
@@ -56,21 +61,167 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB");
 
+    // Create project_sections table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS project_sections (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name_en VARCHAR(255) NOT NULL,
+        name_ar VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        description_en TEXT,
+        description_ar TEXT,
+        display_order INT DEFAULT 0,
+        active TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create project_statuses table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS project_statuses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name_en VARCHAR(255) NOT NULL,
+        name_ar VARCHAR(255) NOT NULL,
+        icon VARCHAR(255) DEFAULT '',
+        color VARCHAR(255) DEFAULT '',
+        display_order INT DEFAULT 0,
+        active TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create technologies table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS technologies (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        icon VARCHAR(255) DEFAULT '',
+        color VARCHAR(255) DEFAULT '',
+        category ENUM('frontend', 'backend', 'database', 'devops', 'tools') NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create tags table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS tags (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name_en VARCHAR(255) NOT NULL,
+        name_ar VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
     // Create projects table
     $pdo->exec("CREATE TABLE IF NOT EXISTS projects (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        type ENUM('pro', 'live') NOT NULL,
-        title_en VARCHAR(255),
-        title_ar VARCHAR(255),
-        tech_en VARCHAR(255),
-        tech_ar VARCHAR(255),
+        title_en VARCHAR(255) NOT NULL,
+        title_ar VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        section_id INT NOT NULL,
+        status_id INT NOT NULL,
+        featured_order INT DEFAULT NULL,
+        visibility ENUM('draft', 'published', 'archived') DEFAULT 'published',
+        thumbnail VARCHAR(255) DEFAULT '',
+        hero_image VARCHAR(255) DEFAULT '',
+        short_description_en TEXT,
+        short_description_ar TEXT,
         description_en TEXT,
         description_ar TEXT,
-        image VARCHAR(255),
-        link VARCHAR(255),
-        icons TEXT,
+        problem_en TEXT,
+        problem_ar TEXT,
+        solution_en TEXT,
+        solution_ar TEXT,
+        architecture_en TEXT,
+        architecture_ar TEXT,
+        challenges_en TEXT,
+        challenges_ar TEXT,
+        lessons_learned_en TEXT,
+        lessons_learned_ar TEXT,
+        my_role_en TEXT,
+        my_role_ar TEXT,
+        company_en VARCHAR(255) DEFAULT '',
+        company_ar VARCHAR(255) DEFAULT '',
+        client_en VARCHAR(255) DEFAULT '',
+        client_ar VARCHAR(255) DEFAULT '',
+        duration_en VARCHAR(255) DEFAULT '',
+        duration_ar VARCHAR(255) DEFAULT '',
+        team_size INT DEFAULT 1,
+        contribution_percentage INT DEFAULT 100,
+        countries_used TEXT,
+        user_count INT DEFAULT 0,
+        performance_score INT DEFAULT 90,
+        completion_percentage INT DEFAULT 100,
+        display_order INT DEFAULT 0,
+        seo_title_en VARCHAR(255) DEFAULT '',
+        seo_title_ar VARCHAR(255) DEFAULT '',
+        seo_description_en TEXT,
+        seo_description_ar TEXT,
+        canonical_url VARCHAR(255) DEFAULT '',
+        og_image VARCHAR(255) DEFAULT '',
+        twitter_image VARCHAR(255) DEFAULT '',
+        keywords TEXT,
+        structured_data TEXT,
+        project_url VARCHAR(255) DEFAULT '',
+        github_url VARCHAR(255) DEFAULT '',
+        case_study_url VARCHAR(255) DEFAULT '',
+        demo_url VARCHAR(255) DEFAULT '',
+        docs_url VARCHAR(255) DEFAULT '',
+        figma_url VARCHAR(255) DEFAULT '',
+        video_url VARCHAR(255) DEFAULT '',
+        showcase_video VARCHAR(255) DEFAULT '',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (section_id) REFERENCES project_sections(id) ON DELETE RESTRICT,
+        FOREIGN KEY (status_id) REFERENCES project_statuses(id) ON DELETE RESTRICT
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Migration: Add short_description columns if they do not exist
+    try {
+        $pdo->exec("ALTER TABLE projects ADD COLUMN short_description_en TEXT AFTER hero_image");
+    } catch (PDOException $e) {}
+    try {
+        $pdo->exec("ALTER TABLE projects ADD COLUMN short_description_ar TEXT AFTER short_description_en");
+    } catch (PDOException $e) {}
+
+    // Create project_images table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS project_images (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        project_id INT NOT NULL,
+        image VARCHAR(255) NOT NULL,
+        alt_text_en VARCHAR(255) DEFAULT '',
+        alt_text_ar VARCHAR(255) DEFAULT '',
+        caption_en VARCHAR(255) DEFAULT '',
+        caption_ar VARCHAR(255) DEFAULT '',
+        display_order INT DEFAULT 0,
+        featured TINYINT(1) DEFAULT 0,
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create project_technologies table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS project_technologies (
+        project_id INT NOT NULL,
+        technology_id INT NOT NULL,
+        PRIMARY KEY (project_id, technology_id),
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+        FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create project_tags table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS project_tags (
+        project_id INT NOT NULL,
+        tag_id INT NOT NULL,
+        PRIMARY KEY (project_id, tag_id),
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+        FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+    // Create media table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS media (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        filename VARCHAR(255) NOT NULL,
+        filepath VARCHAR(255) NOT NULL,
+        file_type VARCHAR(50) NOT NULL,
+        file_size INT NOT NULL,
+        folder VARCHAR(255) DEFAULT 'uploads',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    ) ENGINE=InnoDB");
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
     // Create journey table
     $pdo->exec("CREATE TABLE IF NOT EXISTS journey (
@@ -182,26 +333,24 @@ try {
     }
 
     // Seed Projects
-    $projCount = $db->query("SELECT COUNT(*) FROM projects")->fetchColumn();
-    if ($projCount == 0) {
+    if ($shouldSeedProjects) {
         $projects = [
-            ['pro', 'Server Management Dashboard', 'لوحة إدارة الخوادم', 'Linux, Docker, Kubernetes', 'لينكس، دوكر، كوبرنيتس', '', '', '', '', 'fab fa-linux, fab fa-docker, fas fa-dharmachakra, fas fa-chart-line'],
-            ['pro', 'Secure Webmail Client', 'عميل بريد إلكتروني آمن', 'React, Node.js, PostgreSQL', 'رياكت، نود جي اس، بوستجري اس كيو ال', '', '', '', '', 'fab fa-react, fab fa-node-js, fas fa-database, fas fa-shield-halved'],
-            ['pro', 'Enterprise CRM Platform', 'منصة CRM للمؤسسات', 'Angular, Python, AWS', 'أنجولار، بايثون، أمازون وورلد سيرفيسز', '', '', '', '', 'fab fa-angular, fab fa-python, fab fa-aws'],
-            ['live', 'Fashion Hub E-Commerce', 'متجر أزياء إلكتروني', '', '', 'Fashion Hub description en', 'وصف متجر أزياء إلكتروني', '/assets/images/proj_fashion.png', '#', ''],
-            ['live', 'Travel Booking Portal', 'بوابة حجز السفر', '', '', 'Travel Booking description en', 'وصف بوابة حجز السفر', '/assets/images/proj_travel.png', '#', ''],
-            ['live', 'AI Chatbot Application', 'تطبيق روبوت محادثة ذكي', '', '', 'AI Chatbot description en', 'وصف تطبيق روبوت محادثة ذكي', '/assets/images/proj_chatbot.png', '#', ''],
-            ['live', 'Data Visualization Dashboard', 'لوحة تصور البيانات', '', '', 'Data Visualization description en', 'وصف لوحة تصور البيانات', '/assets/images/proj_data.png', '#', '']
+            ['Server Management Dashboard', 'لوحة إدارة الخوادم', 'server-management-dashboard', 2, 1, '', 'Server Management Dashboard description en', 'وصف لوحة إدارة الخوادم'],
+            ['Secure Webmail Client', 'عميل بريد إلكتروني آمن', 'secure-webmail-client', 2, 1, '', 'Secure Webmail Client description en', 'وصف عميل بريد إلكتروني آمن'],
+            ['Enterprise CRM Platform', 'منصة CRM للمؤسسات', 'enterprise-crm-platform', 2, 1, '', 'Enterprise CRM Platform description en', 'وصف منصة CRM للمؤسسات'],
+            ['Fashion Hub E-Commerce', 'متجر أزياء إلكتروني', 'fashion-hub-e-commerce', 3, 1, '/assets/images/proj_fashion.png', 'Fashion Hub description en', 'وصف متجر أزياء إلكتروني'],
+            ['Travel Booking Portal', 'بوابة حجز السفر', 'travel-booking-portal', 3, 1, '/assets/images/proj_travel.png', 'Travel Booking description en', 'وصف بوابة حجز السفر'],
+            ['AI Chatbot Application', 'تطبيق روبوت محادثة ذكي', 'ai-chatbot-application', 5, 2, '/assets/images/proj_chatbot.png', 'AI Chatbot description en', 'وصف تطبيق روبوت محادثة ذكي'],
+            ['Data Visualization Dashboard', 'لوحة تصور البيانات', 'data-visualization-dashboard', 6, 1, '/assets/images/proj_data.png', 'Data Visualization description en', 'وصف لوحة تصور البيانات']
         ];
-        $stmt = $db->prepare("INSERT INTO projects (type, title_en, title_ar, tech_en, tech_ar, description_en, description_ar, image, link, icons) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO projects (title_en, title_ar, slug, section_id, status_id, thumbnail, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         foreach ($projects as $p) {
             $stmt->execute($p);
         }
     }
 
     // Seed Journey
-    $journeyCount = $db->query("SELECT COUNT(*) FROM journey")->fetchColumn();
-    if ($journeyCount == 0) {
+    if ($shouldSeedJourney) {
         $journey = [
             ['2023', '2023', 'Launched "Apex Finance" Platform', 'إطلاق منصة "أبيكس فاينانس"', 'Apex Finance description en', 'وصف منصة أبيكس فاينانس', 'PROJECT', 'مشروع', 'project', 'left', '/assets/images/journey_apex.png'],
             ['2022', '2022', 'Promoted to Senior Software Engineer', 'ترقية إلى مهندس برمجيات أول', 'Promotion description en', 'وصف الترقية', 'CAREER', 'مسيرة', 'career', 'right', ''],
@@ -215,8 +364,7 @@ try {
     }
 
     // Seed Skills
-    $skillCount = $db->query("SELECT COUNT(*) FROM skills")->fetchColumn();
-    if ($skillCount == 0) {
+    if ($shouldSeedSkills) {
         $skills = [
             ['backend', 'PHP', 'PHP', 1],
             ['backend', 'Laravel', 'Laravel', 2],

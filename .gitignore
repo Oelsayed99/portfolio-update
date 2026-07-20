@@ -3,3 +3,6 @@ vendor/
 .DS_Store
 *.sqlite
 translations.db
+public/assets/uploads/*
+!public/assets/uploads/.gitkeep
+

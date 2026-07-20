@@ -106,7 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close on click outside
     document.addEventListener('click', (e) => {
-        if (Date.now() - lastOpenTime < 150) {
+        // Ignore right clicks or control-clicks
+        if (e.button === 2 || e.ctrlKey) {
+            return;
+        }
+        if (e.target.closest('.editable-translation')) {
             return;
         }
         if (!popup.contains(e.target) && popup.style.display === 'block') {

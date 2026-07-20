@@ -1,6 +1,5 @@
 <?php
-require_once 'auth.php';
-auth_required();
+require_once 'layout.php';
 
 use app\models\User;
 
@@ -32,20 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
 }
 
 $users = User::all();
+
+admin_header("User Management", "users");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Management</title>
-    <link rel="stylesheet" href="/assets/css/admin.css">
-</head>
-<body class="admin-body">
-    <div class="admin-container">
-        <header class="admin-header">
-            <h1>User Management</h1>
-            <a href="/admin/dashboard.php" class="admin-btn">Back to Dashboard</a>
-        </header>
 
         <?php if ($msg): ?>
             <p style="padding:1rem; background:#dcfce7; color:#166534; border-radius:8px;"><?= $msg ?></p>
@@ -100,5 +88,4 @@ $users = User::all();
             </table>
         </div>
     </div>
-</body>
-</html>
+<?php admin_footer(); ?>

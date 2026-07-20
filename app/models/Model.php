@@ -14,7 +14,7 @@ abstract class Model
         self::connect();
     }
 
-    protected static function connect()
+    public static function connect()
     {
         if (self::$db === null) {
             $host = getenv('DB_HOST') !== false ? getenv('DB_HOST') : 'localhost';

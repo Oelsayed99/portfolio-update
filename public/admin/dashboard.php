@@ -1,117 +1,112 @@
 <?php
-require_once 'auth.php';
-auth_required();
+require_once 'layout.php';
 
-use app\models\User;
-use app\models\Translation;
+use app\models\Project;
+use app\models\Technology;
+use app\models\ProjectSection;
 
-// Get some stats
-$userCount = User::count();
-$transCount = Translation::count();
+// Fetch stats
+$db = app\models\Project::connect();
+$totalProjects = $db->query("SELECT COUNT(*) FROM projects")->fetchColumn();
+$publishedCount = $db->query("SELECT COUNT(*) FROM projects WHERE visibility = 'published'")->fetchColumn();
+$draftCount = $db->query("SELECT COUNT(*) FROM projects WHERE visibility = 'draft'")->fetchColumn();
+$featuredCount = $db->query("SELECT COUNT(*) FROM projects WHERE featured_order IS NOT NULL")->fetchColumn();
+$techCount = $db->query("SELECT COUNT(*) FROM technologies")->fetchColumn();
+$sectionsCount = $db->query("SELECT COUNT(*) FROM project_sections")->fetchColumn();
 
-// Enable Live Editor for this session
-$_SESSION['admin_editor_active'] = true;
+// Fetch recently updated projects
+$recentProjects = $db->query("SELECT p.*, s.name_en AS section_name_en FROM projects p LEFT JOIN project_sections s ON p.section_id = s.id ORDER BY p.updated_at DESC LIMIT 5")->fetchAll();
+
+admin_header("Overview Dashboard", "dashboard");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Panel - Site Editor</title>
-    <link rel="stylesheet" href="/assets/css/admin.css">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background: #111;
-        }
-        .admin-wrapper {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        .admin-navbar {
-            background: #18181b;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            z-index: 100;
-        }
-        .nav-left { display: flex; align-items: center; gap: 2rem; }
-        .nav-right { display: flex; align-items: center; gap: 1rem; }
-        
-        .admin-nav-link {
-            color: #a1a1aa;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .admin-nav-link:hover, .admin-nav-link.active { color: white; }
-        
-        .iframe-container {
-            flex: 1;
-            position: relative;
-            background: #fff;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .mode-badge {
-            background: #a855f7;
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-    </style>
-</head>
-<body>
-    <div class="admin-wrapper">
-        <nav class="admin-navbar">
-            <div class="nav-left">
-                <div style="font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px;">
-                    PORTFOLIO <span style="color: #a855f7;">CMS</span>
-                </div>
-                <div class="mode-badge">Editor Mode</div>
-                <a href="/admin/dashboard.php" class="admin-nav-link active">Editor</a>
-                <a href="/admin/projects-manage.php" class="admin-nav-link">Projects</a>
-                <a href="/admin/journey-manage.php" class="admin-nav-link">Journey</a>
-                <a href="/admin/users.php" class="admin-nav-link">Users</a>
-
-            </div>
-            
-            <div class="nav-right">
-                <div class="lang-switcher" style="margin-right: 1rem; font-size: 0.85rem;">
-                    <?php if (($_SESSION['lang'] ?? 'en') === 'en'): ?>
-                        <a href="/lang?lang=ar" class="admin-nav-link">العربية</a>
-                    <?php else: ?>
-                        <a href="/lang?lang=en" class="admin-nav-link">English</a>
-                    <?php endif; ?>
-                </div>
-                <span style="font-size: 0.85rem; color: #a1a1aa;">Logged in as <strong><?= $_SESSION['admin_username'] ?></strong></span>
-                <a href="/admin/logout.php" class="admin-btn" style="background: transparent; border: 1px solid #3f3f46; color: white; font-size: 0.8rem;">Logout</a>
-            </div>
-
-        </nav>
-        
-        <div class="iframe-container">
-            <!-- We pass a query param to tell the app to enable the editor -->
-            <iframe src="/" id="site-iframe"></iframe>
-
+<div class="admin-stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon-wrapper"><i class="fas fa-briefcase"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $totalProjects ?></span>
+            <span class="stat-label">Total Projects</span>
         </div>
     </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper" style="color:var(--admin-success); background:rgba(34, 197, 94, 0.1);"><i class="fas fa-circle-check"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $publishedCount ?></span>
+            <span class="stat-label">Published</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper" style="color:var(--admin-warning); background:rgba(245, 158, 11, 0.1);"><i class="fas fa-file-signature"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $draftCount ?></span>
+            <span class="stat-label">Drafts</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper" style="color:var(--admin-primary); background:rgba(168, 85, 247, 0.1);"><i class="fas fa-star"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $featuredCount ?></span>
+            <span class="stat-label">Featured Showcase</span>
+        </div>
+    </div>
+</div>
 
+<div class="admin-stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
 
-</body>
-</html>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper"><i class="fas fa-code"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $techCount ?></span>
+            <span class="stat-label">Technologies</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper"><i class="fas fa-list"></i></div>
+        <div class="stat-info">
+            <span class="stat-value"><?= $sectionsCount ?></span>
+            <span class="stat-label">Custom Sections</span>
+        </div>
+    </div>
+</div>
+
+<div class="admin-card">
+    <h3>Recently Updated Projects</h3>
+    <div class="admin-table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Section</th>
+                    <th>Status</th>
+                    <th>Visibility</th>
+                    <th>Last Update</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($recentProjects as $p): ?>
+                    <tr>
+                        <td><strong><?= htmlspecialchars($p['title_en']) ?></strong></td>
+                        <td><?= htmlspecialchars($p['section_name_en'] ?: 'N/A') ?></td>
+                        <td>
+                            <span class="admin-badge admin-badge-success">Active</span>
+                        </td>
+                        <td>
+                            <span class="admin-badge <?= $p['visibility'] === 'published' ? 'admin-badge-success' : 'admin-badge-warning' ?>">
+                                <?= htmlspecialchars($p['visibility']) ?>
+                            </span>
+                        </td>
+                        <td><?= htmlspecialchars($p['updated_at']) ?></td>
+                        <td>
+                            <a href="/admin/projects-manage.php?edit=<?= $p['id'] ?>" class="admin-btn admin-btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.8rem;"><i class="fas fa-edit"></i> Edit</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?php
+admin_footer();
+?>
