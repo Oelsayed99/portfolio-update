@@ -48,8 +48,17 @@ class User extends Model
         return self::query("UPDATE users SET password = ?, reset_token = NULL, token_expiry = NULL WHERE id = ?", [$hashedPassword, $id]);
     }
 
-    public static function setResetToken($id, $token, $expiry)
+    public static function findById($id)
     {
-        return self::query("UPDATE users SET reset_token = ?, token_expiry = ? WHERE id = ?", [$token, $expiry, $id]);
+        return self::query("SELECT * FROM users WHERE id = ? LIMIT 1", [$id])->fetch();
+    }
+
+    public static function updateUser($id, $username, $email, $password = null)
+    {
+        if (!empty($password)) {
+            $hashed = password_hash($password, PASSWORD_DEFAULT);
+            return self::query("UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?", [$username, $email, $hashed, $id]);
+        }
+        return self::query("UPDATE users SET username = ?, email = ? WHERE id = ?", [$username, $email, $id]);
     }
 }

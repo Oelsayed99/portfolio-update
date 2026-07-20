@@ -130,30 +130,32 @@ admin_header("Journey Management", "journey");
 
         <div class="admin-card">
             <h3>Existing Journey Entries</h3>
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Title (EN)</th>
-                        <th>Side</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($journey as $j): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($j['date_en']) ?></td>
-                        <td><?= htmlspecialchars($j['title_en']) ?></td>
-                        <td><?= strtoupper($j['side']) ?></td>
-                        <td>
-                            <a href="journey-edit.php?id=<?= $j['id'] ?>" class="admin-btn" style="background:#3b82f6; color:white; margin-right:5px;">Edit</a>
-                            <a href="?delete=<?= $j['id'] ?>" class="admin-btn admin-btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                        </td>
+            <div class="admin-table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title (EN)</th>
+                            <th>Side</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($journey as $j): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($j['date_en']) ?></td>
+                            <td><?= htmlspecialchars($j['title_en']) ?></td>
+                            <td><?= strtoupper($j['side']) ?></td>
+                            <td>
+                                <a href="journey-edit.php?id=<?= $j['id'] ?>" class="admin-btn" style="background:#3b82f6; color:white; margin-right:5px;">Edit</a>
+                                <a href="?delete=<?= $j['id'] ?>" class="admin-btn admin-btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
 
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 <?php admin_footer(); ?>
