@@ -81,6 +81,8 @@ body.admin-body {
 /* Main Workspace */
 .admin-workspace {
     flex-grow: 1;
+    min-width: 0;
+    max-width: 100%;
     padding: 2.5rem;
     box-sizing: border-box;
     overflow-y: auto;
@@ -199,7 +201,23 @@ body.admin-body {
     color: var(--admin-text-muted);
 }
 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
 .admin-form-control {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--admin-border);
     color: var(--admin-text);
@@ -218,6 +236,8 @@ body.admin-body {
 textarea.admin-form-control {
     resize: vertical;
     min-height: 100px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Buttons */
