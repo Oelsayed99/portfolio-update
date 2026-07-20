@@ -326,7 +326,7 @@ function handleVideoClick(videoSrc) {
 <div id="video-showcase-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:100000; justify-content:center; align-items:flex-start; padding-top:10vh;" onclick="if(event.target===this) closeVideoModal();">
     <div style="position:relative; width:90%; max-width:850px; background:#000; border-radius:16px; border:1px solid #27272a; overflow:visible; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
         <button onclick="closeVideoModal()" style="position:absolute; top:-48px; right:0; z-index:100001; background:rgba(24,24,27,0.8); color:#fff; border:1px solid #3f3f46; border-radius:50%; width:36px; height:36px; font-size:1.4rem; cursor:pointer; display:flex; justify-content:center; align-items:center; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#ef4444'" onmouseout="this.style.backgroundColor='rgba(24,24,27,0.8)'">&times;</button>
-        <video id="modal-video-player" src="" controls style="width:100%; display:block; aspect-ratio:16/9; background:#000; border-radius:16px;"></video>
+        <video id="modal-video-player" src="" controls preload="metadata" playsinline style="width:100%; display:block; aspect-ratio:16/9; background:#000; border-radius:16px;"></video>
     </div>
 </div>
 
