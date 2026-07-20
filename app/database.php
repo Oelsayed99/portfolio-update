@@ -36,6 +36,11 @@ try {
     $pdo->exec("CREATE DATABASE IF NOT EXISTS `$name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
     $pdo->exec("USE `$name` ");
 
+    // Fast-path: If database is already initialized, skip schema creation & seeding overhead
+    if ($pdo->query("SHOW TABLES LIKE 'translations'")->fetch()) {
+        return;
+    }
+
     // Check if tables already exist to control seeding
     $shouldSeedProjects = !$pdo->query("SHOW TABLES LIKE 'projects'")->fetch();
     $shouldSeedJourney = !$pdo->query("SHOW TABLES LIKE 'journey'")->fetch();
