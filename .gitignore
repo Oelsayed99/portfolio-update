@@ -3,6 +3,8 @@ vendor/
 .DS_Store
 *.sqlite
 translations.db
-public/assets/uploads/*
-!public/assets/uploads/.gitkeep
+*.mov
+*.mp4
+*.avi
+*.mkv
 
