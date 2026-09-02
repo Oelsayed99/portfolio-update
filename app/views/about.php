@@ -22,10 +22,6 @@ $categories = [
             <h1 class="about-heading"><?= t('about_heading') ?></h1>
             <p class="about-subtitle accent-text"><?= t('about_subtitle') ?></p>
         </div>
-        <div class="about-hero-image-container">
-            <div class="about-image-halo"></div>
-            <img src="/assets/images/about_portrait_new.png" alt="<?= translate('hero_name') ?>" class="about-hero-img">
-        </div>
     </div>
 </section>
 
