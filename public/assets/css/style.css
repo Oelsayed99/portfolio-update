@@ -468,19 +468,6 @@ body.light-mode .purple-glow {
     -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
-.about-image-halo {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    opacity: .4;
-    filter: blur(60px);
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .about-section {
     padding: 60px 0;
     border-top: 1px solid var(--border);
