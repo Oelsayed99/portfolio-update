@@ -12,8 +12,6 @@
                     <a href="https://www.facebook.com/omar.turboo.1/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                     <a href="https://<?= translate('contact_github') ?>" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://<?= translate('contact_linkedin') ?>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-
-                    <a href="https://youtube.com/@omarelsayed" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>

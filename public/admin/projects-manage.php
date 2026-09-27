@@ -65,12 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_project'])) {
         if (isset($_FILES['hero_image_file']) && $_FILES['hero_image_file']['error'] === UPLOAD_ERR_OK) {
             $heroImage = handle_upload($_FILES['hero_image_file'], 'projects');
         }
-
-        $showcaseVideo = $_POST['showcase_video_url'] ?? '';
-        if (isset($_FILES['showcase_video_file']) && $_FILES['showcase_video_file']['error'] === UPLOAD_ERR_OK) {
-            $showcaseVideo = handle_upload($_FILES['showcase_video_file'], 'projects');
-        }
-
         // Build data array
         $data = [
             'title_en' => $_POST['title_en'] ?? '',
@@ -82,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_project'])) {
             'visibility' => $_POST['visibility'] ?? 'published',
             'thumbnail' => $thumbnail,
             'hero_image' => $heroImage,
-            'showcase_video' => $showcaseVideo,
             'description_en' => $_POST['description_en'] ?? '',
             'description_ar' => $_POST['description_ar'] ?? '',
             'short_description_en' => $_POST['short_description_en'] ?? '',
@@ -127,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_project'])) {
             'demo_url' => $_POST['demo_url'] ?? '',
             'docs_url' => $_POST['docs_url'] ?? '',
             'figma_url' => $_POST['figma_url'] ?? '',
-            'video_url' => $_POST['video_url'] ?? '',
             'technologies' => $_POST['technologies'] ?? [],
             'tags' => $_POST['tags'] ?? []
         ];
@@ -373,14 +365,6 @@ admin_header("Project Management", "projects");
                     <label>Upload Gallery Images (Select Multiple)</label>
                     <input type="file" name="gallery_files[]" class="admin-form-control" multiple>
                 </div>
-
-                <div class="admin-form-group" style="margin-top:2rem; border-top:1px dashed var(--admin-border); padding-top:1.5rem;">
-                    <label>Showcase Video (MP4/MOV)</label>
-                    <input type="text" name="showcase_video_url" class="admin-form-control" value="<?= htmlspecialchars($p['showcase_video'] ?? '') ?>" placeholder="Video Path or URL">
-                    <label style="margin-top:0.5rem;">Or Upload Video</label>
-                    <input type="file" name="showcase_video_file" class="admin-form-control" accept="video/*">
-                </div>
-
                 <?php if (!empty($p['images'])): ?>
                     <label style="font-weight:600; color:var(--admin-text-muted); margin-top:1.5rem; display:block;">Active Gallery Images</label>
                     <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; margin-top:0.5rem;">

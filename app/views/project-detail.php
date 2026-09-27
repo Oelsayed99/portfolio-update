@@ -4,83 +4,9 @@ $lang = get_current_lang();
 $gh = json_decode($project['structured_data'] ?? '{}', true);
 ?>
 
-<style>
-.detail-hero-content {
-    position: relative;
-}
-.hero-video-trigger {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-.video-play-btn {
-    background: #a855f7;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    transition: transform 0.2s, background-color 0.2s;
-}
-.video-play-btn i {
-    color: #fff;
-    font-size: 1.5rem;
-    margin-left: 4px;
-}
-.hero-video-trigger:hover .video-play-btn {
-    transform: scale(1.1);
-    background: #9333ea;
-}
-.hero-video-trigger span {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-@media(max-width: 768px) {
-    .hero-video-trigger {
-        position: static;
-        transform: none;
-        margin-top: 1.5rem;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    .video-play-btn {
-        width: 48px;
-        height: 48px;
-    }
-    .video-play-btn i {
-        font-size: 1.1rem;
-    }
-}
-</style>
-
 <!-- ── CASE STUDY HERO ── -->
 <section class="project-detail-hero" style="background-image: url('<?= $project['hero_image'] ?: ($project['thumbnail'] ?: '/assets/images/default_project.png') ?>');">
     <div class="container detail-hero-content">
-        <?php if (!empty($project['showcase_video'])): ?>
-            <div class="hero-video-trigger" onclick="handleVideoClick('<?= htmlspecialchars($project['showcase_video']) ?>')">
-                <div class="video-play-btn">
-                    <i class="fas fa-play"></i>
-                </div>
-                <span><?= $lang === 'ar' ? 'عرض الفيديو' : 'Watch Showcase' ?></span>
-            </div>
-        <?php endif; ?>
-        
         <a href="/projects" class="detail-back-link"><i class="fas fa-arrow-left"></i> <?= $lang === 'ar' ? 'العودة للمشاريع' : 'Back to Projects' ?></a>
         <h1 class="detail-heading"><?= htmlspecialchars($project['title_' . $lang]) ?></h1>
         
@@ -297,37 +223,7 @@ function openLightbox(src) {
 function closeLightbox() {
     document.getElementById('gallery-lightbox').style.display = 'none';
 }
-
-function openVideoModal(videoSrc) {
-    const modal = document.getElementById('video-showcase-modal');
-    const player = document.getElementById('modal-video-player');
-    player.src = videoSrc;
-    modal.style.display = 'flex';
-    player.play().catch(e => console.log("Video autoplay blocked:", e));
-}
-function closeVideoModal() {
-    const modal = document.getElementById('video-showcase-modal');
-    const player = document.getElementById('modal-video-player');
-    player.pause();
-    player.src = '';
-    modal.style.display = 'none';
-}
-
-function handleVideoClick(videoSrc) {
-    if (videoSrc.startsWith('http://') || videoSrc.startsWith('https://')) {
-        window.open(videoSrc, '_blank');
-    } else {
-        openVideoModal(videoSrc);
-    }
-}
 </script>
 
-<!-- Video Showcase Modal -->
-<div id="video-showcase-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:100000; justify-content:center; align-items:flex-start; padding-top:10vh;" onclick="if(event.target===this) closeVideoModal();">
-    <div style="position:relative; width:90%; max-width:850px; background:#000; border-radius:16px; border:1px solid #27272a; overflow:visible; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
-        <button onclick="closeVideoModal()" style="position:absolute; top:-48px; right:0; z-index:100001; background:rgba(24,24,27,0.8); color:#fff; border:1px solid #3f3f46; border-radius:50%; width:36px; height:36px; font-size:1.4rem; cursor:pointer; display:flex; justify-content:center; align-items:center; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#ef4444'" onmouseout="this.style.backgroundColor='rgba(24,24,27,0.8)'">&times;</button>
-        <video id="modal-video-player" src="" controls preload="metadata" playsinline style="width:100%; display:block; aspect-ratio:16/9; background:#000; border-radius:16px;"></video>
-    </div>
-</div>
 
 <?php include PARTIAL_PATH . '/footer.php'; ?>

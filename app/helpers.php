@@ -226,10 +226,10 @@ function handle_upload($file, $target_dir = 'assets/uploads/') {
     if ($mime_type !== null) {
         $allowed_types = [
             'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
-            'video/mp4', 'video/quicktime', 'application/pdf'
+            'application/pdf'
         ];
         if (!in_array($mime_type, $allowed_types)) {
-            throw new Exception("Invalid file type: " . htmlspecialchars($mime_type) . ". Allowed types: JPG, PNG, GIF, WEBP, SVG, MP4, MOV, and PDF.");
+            throw new Exception("Invalid file type: " . htmlspecialchars($mime_type) . ". Allowed types: JPG, PNG, GIF, WEBP, SVG, and PDF.");
         }
     }
 
