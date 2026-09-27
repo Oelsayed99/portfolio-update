@@ -34,7 +34,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASS:-StrongPassword123!}
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database/portfolio_export.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASS:-SuperSecureRoot456!}"]
       interval: 5s

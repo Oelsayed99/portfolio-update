@@ -49,7 +49,7 @@ docker compose up -d
 Load the schema:
 
 ```bash
-docker compose exec -T mysql mysql -uroot -proot portfolio < database/portfolio_export.sql
+docker compose exec -T db mysql -uroot -proot portfolio < database/seed.sql
 ```
 
 ## Deployment
