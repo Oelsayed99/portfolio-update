@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/favicon-32.png">
     <link rel="stylesheet" href="/assets/css/admin.css">
     <style>
         body { display: flex; align-items: center; justify-content: center; height: 100vh; background: #f0f2f5; }
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="admin-body">
     <div class="admin-card login-card">
+        <img src="/assets/images/brand/logo-group.webp" alt="Omar Elsayed" style="display:block; width:220px; height:auto; margin:0 auto 1.5rem">
         <h2 style="margin-top:0">Admin Login</h2>
         <?php if ($error): ?>
             <p style="color:red"><?= $error ?></p>

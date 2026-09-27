@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Omar Elsayed — Software Engineer & Full-Stack Developer. Creating innovative and scalable web applications.">
     <title><?= translate($title_key ?? 'nav_home') ?> | <?= translate('hero_name') ?></title>
-    
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/brand/icon-192.png">
+    <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png">
+    <meta property="og:image" content="<?= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . htmlspecialchars($_SERVER['HTTP_HOST'] ?? 'elsayedomar.com') ?>/assets/images/brand/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +32,7 @@
     <header id="site-header">
         <nav class="container">
             <div class="logo">
-                <a href="/"><?= t('hero_name') ?></a>
+                <a href="/"><img src="/assets/images/brand/logo-text.webp" alt="<?= htmlspecialchars(translate('hero_name')) ?>" width="1200" height="186"></a>
             </div>
             
             <ul class="nav-links" id="nav-links">

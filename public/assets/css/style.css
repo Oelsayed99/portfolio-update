@@ -104,6 +104,17 @@ nav {
     transition: var(--transition)
 }
 
+.logo img {
+    height: 30px;
+    width: auto
+}
+
+@media(max-width:480px) {
+    .logo img {
+        height: 22px
+    }
+}
+
 .logo a:hover {
     opacity: .8
 }

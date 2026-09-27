@@ -50,6 +50,7 @@ function admin_header($title = "Dashboard", $activeLink = "dashboard") {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= htmlspecialchars($title) ?> - Portfolio CMS</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/favicon-32.png">
         <link rel="stylesheet" href="/assets/css/admin.css">
         <!-- FontAwesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -58,7 +59,7 @@ function admin_header($title = "Dashboard", $activeLink = "dashboard") {
         <!-- Sidebar -->
         <aside class="admin-sidebar">
             <div class="admin-logo">
-                <i class="fas fa-cubes"></i> CMS Panel
+                <img src="/assets/images/brand/logo-icon.webp" alt="" height="28"> CMS Panel
             </div>
             <ul class="sidebar-menu">
                 <li>
