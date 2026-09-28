@@ -34,6 +34,18 @@ function t($msgid) {
 }
 
 /**
+ * Multi-line translation: one line per <$tag> for visitors, a single
+ * editable block in the Visual Editor (so the whole text stays one msgid).
+ */
+function t_lines($msgid, $tag = 'p') {
+    if (isset($_SESSION['admin_user_id'], $_SESSION['admin_editor_active'])) {
+        return "<$tag class='t-lines-edit'>" . t($msgid) . "</$tag>";
+    }
+    $lines = array_filter(array_map('trim', explode("\n", translate($msgid))));
+    return implode('', array_map(fn($l) => "<$tag>" . htmlspecialchars($l) . "</$tag>", $lines));
+}
+
+/**
  * Language Switcher Helper
  */
 function get_current_lang() {
@@ -147,13 +159,13 @@ function send_contact_email($name, $email, $message) {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = "New Contact Form Message: $name";
+        $mail->Subject = "New Contact Form Message: " . str_replace(["\r", "\n"], ' ', $name);
         
         $emailBody = "
         <div style='font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;'>
             <h2 style='color: #2563eb;'>New Message from Portfolio</h2>
-            <p><strong>Name:</strong> {$name}</p>
-            <p><strong>Email:</strong> {$email}</p>
+            <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
+            <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
             <p style='margin-top: 20px;'><strong>Message:</strong></p>
             <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; border-left: 4px solid #2563eb;'>
                 " . nl2br(htmlspecialchars($message)) . "

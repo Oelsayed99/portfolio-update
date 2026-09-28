@@ -62,6 +62,7 @@ $router->add('about', 'app\controllers\AboutController', 'index');
 $router->add('projects', 'app\controllers\ProjectController', 'index');
 $router->add('projects/:slug', 'app\controllers\ProjectController', 'detail');
 $router->add('blog', 'app\controllers\BlogController', 'index');
+$router->add('services', 'app\controllers\ServicesController', 'index');
 $router->add('contact', 'app\controllers\ContactController', 'index');
 $router->add('contact/submit', 'app\controllers\ContactController', 'submit');
 $router->add('lang', 'app\controllers\Controller', 'switchLang');

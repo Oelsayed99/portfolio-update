@@ -601,3 +601,9 @@ textarea.admin-form-control {
         gap: 1.5rem;
     }
 }
+
+/* Visual Editor: keep labels on clickable cards reachable by right-click */
+.project-card-new .card-cta {
+    position: relative;
+    z-index: 2
+}

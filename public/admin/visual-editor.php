@@ -9,7 +9,7 @@ $_SESSION['admin_editor_active'] = true;
 <head>
     <meta charset="UTF-8">
     <title>Visual Editor - Portfolio CMS</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <style>
         body, html {
             margin: 0;

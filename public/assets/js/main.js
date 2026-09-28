@@ -81,3 +81,28 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(card);
     });
 });
+
+// Scroll reveal for any `.reveal` element; also counts up a `[data-count]` number inside it.
+// Content is only hidden once this runs (html.js-reveal), so it stays visible without JS.
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length || !('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('js-reveal');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-visible');
+        const num = e.target.querySelector('[data-count]');
+        if (num && !reduce) {
+            const end = +num.dataset.count, start = end > 1000 ? end - 12 : 0, t0 = performance.now();
+            const tick = now => {
+                const k = Math.min(1, (now - t0) / 1200);
+                num.textContent = Math.round(start + (end - start) * (1 - Math.pow(1 - k, 3)));
+                if (k < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }
+        io.unobserve(e.target);
+    }), { threshold: 0.15 });
+    items.forEach(el => io.observe(el));
+});

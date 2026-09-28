@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="stylesheet" href="/assets/css/admin.css">
     <style>
         body { display: flex; align-items: center; justify-content: center; height: 100vh; background: #f0f2f5; }
