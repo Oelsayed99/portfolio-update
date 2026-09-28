@@ -3,39 +3,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Portfolio site loaded');
 
-    // Theme Toggle
+    // Theme: preference is system (default) | light | dark, stored in the "theme" cookie.
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    const icon = themeToggle.querySelector('i');
+    const systemLight = matchMedia('(prefers-color-scheme: light)');
+    const order = ['system', 'light', 'dark'];
+    const icons = { system: 'fa-circle-half-stroke', light: 'fa-sun', dark: 'fa-moon' };
+    let pref = body.dataset.themePref || 'system';
 
-    // Check for saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    body.classList.remove('dark-mode', 'light-mode');
-    body.classList.add(savedTheme + '-mode');
-    updateIcon(savedTheme);
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.replace('dark-mode', 'light-mode');
-                localStorage.setItem('theme', 'light');
-                document.cookie = "theme=light; path=/; max-age=" + (86400 * 30);
-                updateIcon('light');
-            } else {
-                body.classList.replace('light-mode', 'dark-mode');
-                localStorage.setItem('theme', 'dark');
-                document.cookie = "theme=dark; path=/; max-age=" + (86400 * 30);
-                updateIcon('dark');
-            }
-        });
+    function applyTheme() {
+        const mode = pref === 'system' ? (systemLight.matches ? 'light' : 'dark') : pref;
+        body.classList.remove('dark-mode', 'light-mode');
+        body.classList.add(mode + '-mode');
+        if (themeToggle) {
+            themeToggle.querySelector('i').className = 'fas ' + icons[pref];
+            const label = themeToggle.dataset['label' + pref[0].toUpperCase() + pref.slice(1)] || pref;
+            themeToggle.title = label;
+            themeToggle.setAttribute('aria-label', label);
+        }
     }
 
-    function updateIcon(theme) {
-        if (theme === 'dark') {
-            icon.classList.replace('fa-sun', 'fa-moon');
-        } else {
-            icon.classList.replace('fa-moon', 'fa-sun');
-        }
+    applyTheme();
+    systemLight.addEventListener('change', () => { if (pref === 'system') applyTheme(); });
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            pref = order[(order.indexOf(pref) + 1) % order.length];
+            body.dataset.themePref = pref;
+            document.cookie = 'theme=' + pref + '; path=/; max-age=' + (86400 * 365) + '; SameSite=Lax';
+            applyTheme();
+        });
     }
 
     // Mobile Menu Toggle

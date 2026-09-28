@@ -23,13 +23,20 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/assets/css/style.css?v=<?= filemtime(BASE_PATH . '/public/assets/css/style.css') ?>">
     
-    <?php if (isset($_SESSION['admin_user_id']) && isset($_SESSION['admin_editor_active'])): ?>
+    <?php if (is_editor_mode()): ?>
         <!-- Admin Panel Styles -->
         <link rel="stylesheet" href="/assets/css/admin.css">
     <?php endif; ?>
 
 </head>
-<body class="<?= $_COOKIE['theme'] ?? 'dark' ?>-mode">
+<?php $themePref = in_array($_COOKIE['theme'] ?? '', ['light', 'dark', 'system'], true) ? $_COOKIE['theme'] : 'system'; ?>
+<body class="<?= $themePref === 'light' ? 'light' : 'dark' ?>-mode" data-theme-pref="<?= $themePref ?>">
+<script>
+// "system" follows the device; resolve it before anything paints to avoid a flash
+if (document.body.dataset.themePref === 'system' && matchMedia('(prefers-color-scheme: light)').matches) {
+    document.body.classList.replace('dark-mode', 'light-mode');
+}
+</script>
     <header id="site-header">
         <nav class="container">
             <div class="logo">
@@ -47,8 +54,11 @@
 
             <div class="header-actions">
                 <!-- Theme Toggle -->
-                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
+                <button id="theme-toggle" class="icon-btn"
+                        data-label-system="<?= htmlspecialchars(translate('theme_system')) ?>"
+                        data-label-light="<?= htmlspecialchars(translate('theme_light')) ?>"
+                        data-label-dark="<?= htmlspecialchars(translate('theme_dark')) ?>">
+                    <i class="fas fa-circle-half-stroke"></i>
                 </button>
                 
                 <!-- Language Switcher -->

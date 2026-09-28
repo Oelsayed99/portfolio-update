@@ -4,6 +4,7 @@
 :root {
     --primary: #fff;
     --accent: #a855f7;
+    --accent-text: #c084fc;
     --bg: #121214;
     --bg-surface: #16161a;
     --text: #fff;
@@ -21,6 +22,7 @@
 }
 
 body.light-mode {
+    --accent-text: #6d28d9;
     --bg: #f5f0fa;
     --bg-surface: #ede8f4;
     --text: #18181b;
@@ -306,7 +308,7 @@ nav {
     font-size: .75rem;
     letter-spacing: .08em;
     text-transform: uppercase;
-    color: #c084fc;
+    color: var(--accent-text);
     padding: .4rem .9rem;
     border: 1px solid rgba(168, 85, 247, .35);
     border-radius: 999px;
@@ -519,7 +521,7 @@ body.light-mode .purple-glow {
 }
 
 .about-facts i {
-    color: #c084fc;
+    color: var(--accent-text);
     margin-inline-end: .35rem
 }
 
@@ -561,6 +563,7 @@ body.light-mode .purple-glow {
 .about-badge {
     position: absolute;
     z-index: 2;
+    color: #f4f4f7;
     font-size: .8rem;
     font-weight: 600;
     padding: .55rem .9rem;
@@ -616,7 +619,7 @@ body.light-mode .purple-glow {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 3.5vw, 2.6rem);
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     line-height: 1.1
 }
 
@@ -693,6 +696,7 @@ body.light-mode .purple-glow {
 }
 
 .about-gallery figcaption {
+    color: #f4f4f7;
     position: absolute;
     inset-inline-start: .75rem;
     bottom: .75rem;
@@ -797,7 +801,7 @@ body.light-mode .purple-glow {
 
 .exp-when {
     font-size: .8rem;
-    color: #c084fc;
+    color: var(--accent-text);
     white-space: nowrap
 }
 
@@ -875,7 +879,7 @@ body.light-mode .purple-glow {
 }
 
 .skill-list-new li:hover {
-    color: #fff;
+    color: var(--text);
     border-color: rgba(168, 85, 247, .6)
 }
 
@@ -1253,7 +1257,7 @@ body.light-mode .purple-glow {
     place-items: center;
     background: var(--card-bg);
     border: 2px solid rgba(168, 85, 247, .55);
-    color: #c084fc;
+    color: var(--accent-text);
     font-size: .85rem;
     z-index: 1;
     box-shadow: 0 0 0 5px var(--bg);
@@ -1321,7 +1325,7 @@ body.light-mode .purple-glow {
     letter-spacing: .08em;
     padding: .2rem .6rem;
     border-radius: 6px;
-    color: #c084fc;
+    color: var(--accent-text);
     background: rgba(124, 58, 237, .14)
 }
 
@@ -1738,7 +1742,8 @@ body.light-mode .purple-glow {
     word-break: break-all
 }
 
-.footer-col .footer-cta {
+.footer-col .footer-cta,
+.footer-col .footer-cta:hover {
     color: #fff;
     margin-top: .5rem
 }
@@ -2054,7 +2059,7 @@ body.light-mode .purple-glow {
     font-size: .8rem;
     font-weight: 600;
     vertical-align: middle;
-    color: #c084fc;
+    color: var(--accent-text);
     padding: .15rem .6rem;
     border-radius: 20px;
     border: 1px solid rgba(168, 85, 247, .35);
@@ -2258,7 +2263,7 @@ body.light-mode .purple-glow {
     border-radius: 10px;
     background: rgba(124, 58, 237, .12);
     border: 1px solid rgba(168, 85, 247, .25);
-    color: #c084fc;
+    color: var(--accent-text);
     font-size: 1.1rem
 }
 
@@ -2272,7 +2277,7 @@ body.light-mode .purple-glow {
 
 .project-card-company {
     font-size: .72rem;
-    color: #c084fc;
+    color: var(--accent-text);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .08em;
@@ -2329,7 +2334,7 @@ body.light-mode .purple-glow {
 }
 
 .tech-badge--more {
-    color: #c084fc
+    color: var(--accent-text)
 }
 
 .project-card-actions {
@@ -2345,7 +2350,7 @@ body.light-mode .purple-glow {
 .card-cta {
     font-size: .85rem;
     font-weight: 600;
-    color: #c084fc;
+    color: var(--accent-text);
     display: inline-flex;
     align-items: center;
     gap: .45rem
@@ -2488,7 +2493,7 @@ body.light-mode .purple-glow {
 }
 
 .projects-empty i {
-    color: #c084fc;
+    color: var(--accent-text);
     margin-inline-end: .4rem
 }
 
@@ -2909,7 +2914,7 @@ body.light-mode .purple-glow {
     cursor: pointer;
     font-size: .85rem;
     font-weight: 600;
-    color: #c084fc;
+    color: var(--accent-text);
     display: flex;
     justify-content: space-between;
     align-items: center
@@ -2994,7 +2999,7 @@ body.light-mode .purple-glow {
     border-radius: 50%;
     background: var(--card-bg);
     border: 1px solid rgba(168, 85, 247, .45);
-    color: #c084fc;
+    color: var(--accent-text);
     font-size: 1.1rem;
     transition: background .3s, color .3s, transform .3s
 }
@@ -3040,7 +3045,7 @@ body.light-mode .purple-glow {
 }
 
 .svc-why-item>i {
-    color: #c084fc;
+    color: var(--accent-text);
     font-size: 1.2rem;
     margin-top: .2rem
 }
@@ -3246,4 +3251,17 @@ body.light-mode .purple-glow {
 [dir="rtl"] .projects-search-wrapper i {
     left: auto;
     right: 1rem
+}
+
+/* Light mode: darker shades so green/blue timeline labels keep contrast */
+body.light-mode .tl-tag--career,
+body.light-mode .tl-dot--career {
+    color: #15803d
+}
+
+body.light-mode .tl-tag--cert,
+body.light-mode .tl-tag--learning,
+body.light-mode .tl-dot--cert,
+body.light-mode .tl-dot--learning {
+    color: #0369a1
 }

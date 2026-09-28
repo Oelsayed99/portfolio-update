@@ -4,7 +4,7 @@ use app\models\Skill;
 
 $lang = get_current_lang();
 $skills = Skill::getGrouped();
-$is_admin = isset($_SESSION['admin_user_id']) && isset($_SESSION['admin_editor_active']);
+$is_admin = is_editor_mode();
 ?>
 
 <?php

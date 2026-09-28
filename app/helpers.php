@@ -12,17 +12,22 @@ function translate($msgid) {
 }
 
 /**
+ * Visual Editor mode: a logged-in admin, the editor opened, AND this page is
+ * loading inside the editor's iframe. Browsing the site directly (even while
+ * logged in) never shows the edit popups.
+ */
+function is_editor_mode() {
+    return isset($_SESSION['admin_user_id'], $_SESSION['admin_editor_active'])
+        && ($_SERVER['HTTP_SEC_FETCH_DEST'] ?? '') === 'iframe';
+}
+
+/**
  * Editable Translation Wrapper (for Admin)
  */
 function t($msgid) {
     $text = translate($msgid);
-    
-    // Check if we should show the editor
-    $is_admin = isset($_SESSION['admin_user_id']);
-    $editor_active = isset($_SESSION['admin_editor_active']);
 
-
-    if ($is_admin && $editor_active) {
+    if (is_editor_mode()) {
         $lang = $_SESSION['lang'] ?? $_COOKIE['lang'] ?? 'en';
         $data = Translation::getWithEn($msgid, $lang);
         $en_text = $data['en'] ?? $msgid;
@@ -38,7 +43,7 @@ function t($msgid) {
  * editable block in the Visual Editor (so the whole text stays one msgid).
  */
 function t_lines($msgid, $tag = 'p') {
-    if (isset($_SESSION['admin_user_id'], $_SESSION['admin_editor_active'])) {
+    if (is_editor_mode()) {
         return "<$tag class='t-lines-edit'>" . t($msgid) . "</$tag>";
     }
     $lines = array_filter(array_map('trim', explode("\n", translate($msgid))));

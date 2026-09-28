@@ -52,7 +52,7 @@
     <!-- Main JavaScript -->
     <script src="/assets/js/main.js?v=<?= filemtime(BASE_PATH . '/public/assets/js/main.js') ?>"></script>
 
-    <?php if (isset($_SESSION['admin_user_id']) && isset($_SESSION['admin_editor_active'])): ?>
+    <?php if (is_editor_mode()): ?>
         <!-- Admin Interaction Logic -->
         <script src="/assets/js/admin.js"></script>
     <?php endif; ?>
