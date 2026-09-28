@@ -19,7 +19,7 @@ $steps = [1 => 'magnifying-glass', 2 => 'compass-drafting', 3 => 'code', 4 => 'r
             </div>
         </div>
         <div class="svc-hero-art reveal">
-            <img src="/assets/images/home/services.webp" alt="" width="1200" height="900">
+            <img src="<?= asset('/assets/images/home/services.webp') ?>" alt="" width="1200" height="900">
         </div>
     </div>
 </section>
@@ -61,7 +61,7 @@ $steps = [1 => 'magnifying-glass', 2 => 'compass-drafting', 3 => 'code', 4 => 'r
     <!-- ── WHY ME ── -->
     <section class="about-block svc-why">
         <div class="svc-why-art reveal">
-            <img src="/assets/images/home/about.webp" alt="" loading="lazy" width="1200" height="900">
+            <img src="<?= asset('/assets/images/home/projects.webp') ?>" alt="" loading="lazy" width="1200" height="900">
         </div>
         <div class="reveal">
             <h2 class="about-block-title"><?= t('svc_why_title') ?></h2>

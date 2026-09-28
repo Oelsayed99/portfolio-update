@@ -51,6 +51,14 @@ function t_lines($msgid, $tag = 'p') {
 }
 
 /**
+ * Public asset URL with a version stamp, so a replaced file (same name) is never served stale from cache.
+ */
+function asset($path) {
+    $file = BASE_PATH . '/public' . $path;
+    return $path . (is_file($file) ? '?v=' . filemtime($file) : '');
+}
+
+/**
  * Language Switcher Helper
  */
 function get_current_lang() {
