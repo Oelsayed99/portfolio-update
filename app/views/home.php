@@ -33,15 +33,21 @@ $tiles = [
     </div>
 </section>
 
-<!-- ── EXPLORE TILES ── -->
+<!-- ── EXPLORE ── -->
+<?php $arrow = $lang === 'ar' ? 'left' : 'right'; ?>
 <section class="explore">
     <div class="container">
         <h2 class="explore-heading"><?= t('home_explore') ?></h2>
         <div class="explore-grid">
-            <?php foreach ($tiles as $tile): ?>
-            <a href="<?= $tile['href'] ?>" class="explore-tile" style="background-image:url('<?= $tile['img'] ?>')">
-                <span class="explore-label"><?= t($tile['label']) ?></span>
-                <span class="explore-go" aria-hidden="true"><i class="fas fa-arrow-<?= $lang === 'ar' ? 'left' : 'right' ?>"></i></span>
+            <?php foreach ($tiles as $n => $tile): $key = substr($tile['href'], 1); ?>
+            <a href="<?= $tile['href'] ?>" class="explore-tile" style="--img:url('<?= asset($tile['img']) ?>')">
+                <span class="explore-media" aria-hidden="true"></span>
+                <span class="explore-num"><?= sprintf('%02d', $n + 1) ?></span>
+                <span class="explore-copy">
+                    <span class="explore-label"><?= t($tile['label']) ?></span>
+                    <span class="explore-desc"><?= t("home_tile_$key") ?></span>
+                </span>
+                <span class="explore-go" aria-hidden="true"><i class="fas fa-arrow-<?= $arrow ?>"></i></span>
             </a>
             <?php endforeach; ?>
         </div>

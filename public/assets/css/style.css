@@ -3121,63 +3121,152 @@ body.light-mode .purple-glow {
     margin-bottom: 2rem
 }
 
-.explore-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem
-}
-
 .explore-tile {
     position: relative;
-    aspect-ratio: 4 / 3;
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--card-bg) center / cover no-repeat;
-    border: 1px solid var(--border);
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 1.25rem;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
     color: #fff;
     isolation: isolate;
     transition: transform .4s var(--ease), border-color .4s var(--ease)
 }
 
-.explore-tile::before {
-    content: "";
+.explore-media {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(0deg, rgba(18, 18, 20, .9) 0%, rgba(18, 18, 20, .15) 60%)
+    background: var(--img) center / cover no-repeat;
+    transition: transform .8s var(--ease)
+}
+
+.explore-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(12, 12, 14, .92) 0%, rgba(12, 12, 14, .35) 55%, rgba(12, 12, 14, .1) 100%)
 }
 
 .explore-tile:hover {
-    transform: translateY(-4px);
     border-color: var(--purple-hover)
+}
+
+.explore-tile:hover .explore-media {
+    transform: scale(1.05)
+}
+
+.explore-num {
+    position: absolute;
+    top: 1rem;
+    inset-inline-start: 1.1rem;
+    font-size: .75rem;
+    letter-spacing: .15em;
+    color: rgba(255, 255, 255, .7)
+}
+
+.explore-copy {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    min-width: 0
 }
 
 .explore-label {
     font-family: var(--font-heading);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    padding: .35rem .9rem;
-    border-radius: 999px;
-    background: rgba(18, 18, 20, .7);
-    backdrop-filter: blur(8px)
+    line-height: 1.15
+}
+
+.explore-desc {
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .78);
+    line-height: 1.5
 }
 
 .explore-go {
+    flex-shrink: 0;
     width: 44px;
     height: 44px;
     border-radius: 50%;
     display: grid;
     place-items: center;
     background: var(--purple);
-    transition: background .3s
+    transition: background .3s, transform .3s var(--ease)
 }
 
 .explore-tile:hover .explore-go {
-    background: var(--purple-hover)
+    background: var(--purple-hover);
+    transform: translateX(3px)
+}
+
+[dir="rtl"] .explore-tile:hover .explore-go {
+    transform: translateX(-3px)
+}
+
+/* Expanding panels: the hovered/focused panel widens and reveals its description */
+.explore .explore-grid {
+    display: flex;
+    gap: 1rem;
+    height: 460px
+}
+
+.explore .explore-tile {
+    flex: 1;
+    min-width: 0;
+    align-items: flex-end;
+    padding: 1.4rem;
+    transition: flex .6s var(--ease), border-color .4s
+}
+
+.explore .explore-tile:hover,
+.explore .explore-tile:focus-visible {
+    flex: 2.6
+}
+
+.explore .explore-go {
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1rem;
+    width: 38px;
+    height: 38px
+}
+
+.explore .explore-desc {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .5s var(--ease), opacity .4s
+}
+
+.explore .explore-tile:hover .explore-desc,
+.explore .explore-tile:focus-visible .explore-desc {
+    max-height: 5rem;
+    opacity: 1
+}
+
+@media(max-width:900px) {
+    .explore .explore-grid {
+        flex-direction: column;
+        height: auto
+    }
+
+    .explore .explore-tile {
+        min-height: 180px
+    }
+
+    .explore .explore-desc {
+        max-height: none;
+        opacity: 1
+    }
+}
+
+
+@media(max-width:480px) {
+    .explore-label {
+        font-size: 1.15rem
+    }
 }
 
 .home-cta {
@@ -3199,27 +3288,6 @@ body.light-mode .purple-glow {
 .home-cta-card h2 {
     font-size: clamp(1.4rem, 2.6vw, 2rem);
     max-width: 30ch
-}
-
-@media(max-width:700px) {
-    .explore-grid {
-        grid-template-columns: 1fr
-    }
-}
-
-@media(max-width:480px) {
-    .explore-grid {
-        gap: .75rem
-    }
-
-    .explore-label {
-        font-size: 1rem
-    }
-
-    .explore-go {
-        width: 36px;
-        height: 36px
-    }
 }
 
 /* Arabic script needs taller lines than Latin display type */
@@ -3264,4 +3332,18 @@ body.light-mode .tl-tag--learning,
 body.light-mode .tl-dot--cert,
 body.light-mode .tl-dot--learning {
     color: #0369a1
+}
+
+/* project entries on the timeline link to the project (whole card clickable via .card-link::after) */
+.tl-card--link {
+    position: relative
+}
+
+.tl-card--link .card-cta {
+    margin-top: .8rem
+}
+
+/* project covers/screenshots are 16:10 — show them whole instead of the wide photo strip */
+.tl-card--link .tl-img {
+    aspect-ratio: 16 / 10
 }
