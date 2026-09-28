@@ -1,0 +1,551 @@
+{
+ "flow-egypt": {
+  "en": {
+   "title": "Flow Egypt",
+   "hero_image": "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.11.20 PM.png",
+   "company": "Flow Egypt",
+   "section": "Personal Projects",
+   "status": "Completed",
+   "tags": [],
+   "description": "Flow Egypt is a corporate website developed for a real estate company to showcase its services, strengthen its online presence, and provide an easy way for potential clients to explore the business and get in touch.\n\n\n\nThe project was built from the ground up, covering every stage of development—from UI/UX design and application architecture to deployment, email configuration, and production launch.",
+   "problem": "Flow Egypt needed a modern, professional website that reflected the company's brand, presented its services clearly, and supported both Arabic- and English-speaking audiences. The solution also needed to be easy to maintain and responsive across all devices.",
+   "solution": "I designed and developed a complete custom web application using Laravel and Tailwind CSS, implementing a bilingual user experience, responsive layouts, dynamic image galleries, contact forms, and a streamlined content management workflow. The project was deployed to production with Cloudflare integration and fully configured email services.",
+   "architecture": "The application follows Laravel's MVC architecture, separating presentation, business logic, and data access to keep the codebase maintainable. Dynamic content is served from the backend while the frontend uses reusable components for a consistent user experience. Docker was used during development to provide a reproducible environment, and Cloudflare was configured for DNS management and performance.",
+   "challenges": "The project did not present significant technical obstacles, allowing me to focus on delivering a clean, polished, and reliable implementation. The primary objective was producing a high-quality solution that met the client's requirements while maintaining good development practices.",
+   "lessons_learned": "This project reinforced the importance of managing the complete software development lifecycle independently. Working directly from initial requirements through design, implementation, deployment, and production support strengthened my ability to deliver complete web solutions while balancing technical quality with business needs.",
+   "metrics": {
+    "My Role": "Full Stack Developer & UI/UX Designer",
+    "Duration": "2 weeks",
+    "Team Size": "1 Members",
+    "My Contribution": "100%",
+    "Performance Score": "70/100",
+    "Active Users": "20+"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "Docker",
+    "Git",
+    "VPS Deployment"
+   ],
+   "links": [
+    [
+     "https://flow-egy.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/flow-corporate",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.11.20 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.13.57 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.14 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.33 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.53 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.09 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.30 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.42 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.16.00 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.16.15 PM.png"
+   ]
+  },
+  "ar": {
+   "title": "فلو إيجيبت",
+   "hero_image": "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.11.20 PM.png",
+   "company": "فلو إيجيبت",
+   "section": "المشاريع الشخصية",
+   "status": "مكتمل",
+   "tags": [],
+   "description": "موقع Flow Egypt هو موقع إلكتروني مصمم خصيصًا لشركة عقارية لعرض خدماتها، وتعزيز حضورها الرقمي، وتوفير طريقة سهلة للعملاء المحتملين لاستكشاف أعمالها والتواصل معها.\n\n\n\nتم بناء المشروع من الصفر، وشمل جميع مراحل التطوير، بدءًا من تصميم واجهة المستخدم وتجربة المستخدم، وهيكلة التطبيق، وصولًا إلى النشر، وإعداد البريد الإلكتروني، وإطلاق الموقع رسميًا.",
+   "problem": "كانت شركة فلو إيجيبت بحاجة إلى موقع إلكتروني عصري واحترافي يعكس هوية الشركة، ويعرض خدماتها بوضوح، ويدعم الجمهور الناطق باللغتين العربية والإنجليزية. كما كان من الضروري أن يكون الموقع سهل الصيانة ومتوافقًا مع جميع الأجهزة.",
+   "solution": "قمت بتصميم وتطوير تطبيق ويب مخصص بالكامل باستخدام Laravel وTailwind CSS، مع توفير تجربة مستخدم ثنائية اللغة، وتصميمات متجاوبة، ومعارض صور ديناميكية، ونماذج اتصال، ونظام إدارة محتوى مبسط. تم نشر المشروع في بيئة الإنتاج مع تكامل Cloudflare وخدمات بريد إلكتروني مُهيأة بالكامل.",
+   "metrics": {
+    "دوري": "مطور برامج متكامل و مصمم واجهات",
+    "حجم الفريق": "1 أعضاء",
+    "نسبة مساهمتي": "100%",
+    "مؤشر الأداء (Lighthouse)": "70/100",
+    "عدد المستخدمين": "20+"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "Docker",
+    "Git",
+    "VPS Deployment"
+   ],
+   "links": [
+    [
+     "https://flow-egy.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/flow-corporate",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.11.20 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.13.57 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.14 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.33 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.14.53 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.09 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.30 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.15.42 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.16.00 PM.png",
+    "/assets/uploads/1784488880_Screenshot 2026-07-19 at 11.16.15 PM.png"
+   ]
+  }
+ },
+ "kas-hosting-administration-panel": {
+  "en": {
+   "title": "KAS – Hosting Administration Panel",
+   "hero_image": "/assets/uploads/1784566556_1777756893_unternehmensportrait_startscreen.jpg",
+   "company": "ALL-INKL.com",
+   "section": "Professional Projects",
+   "status": "Completed",
+   "tags": [
+    "Web App",
+    "Dashboard"
+   ],
+   "description": "KAS is ALL-INKL's proprietary hosting administration platform, providing customers with a centralized interface to manage hosting services, domains, email accounts, databases, and other hosting resources.\n\n\n\nAs part of an international engineering team based in Dubai and Germany, I contributed to the development and modernization of the platform over approximately 18 months. My work included designing and implementing new user interfaces, developing reusable frontend architecture, building backend functionality with vanilla PHP, integrating internal APIs, and improving the overall usability and performance of the application.\n\n\n\nThroughout the project, I developed reusable UI components including universal tables, pagination, tooltips, notification systems, password generation tools, language and theme switchers, advanced filtering and search functionality, responsive layouts, and a custom CSS utility framework. I also contributed to automation scripts, testing, production improvements, and performance optimization to support the continuous evolution of the platform.",
+   "problem": "As the platform continued to evolve, there was a need to modernize the user experience, improve interface consistency, introduce reusable frontend components, and streamline user workflows while maintaining compatibility with existing backend services and infrastructure.",
+   "solution": "Develop modern and reusable frontend components, improve dashboard usability, implement advanced interface features, integrate seamlessly with internal APIs, optimize performance, and build maintainable code that supports the continued evolution of the platform.",
+   "architecture": "The application follows a server-rendered architecture built with vanilla PHP on the backend and vanilla JavaScript on the frontend. The frontend communicates with internal APIs provided by the engineering team in Germany, allowing new interface features to be developed while respecting organizational data access policies. The platform emphasizes reusable UI components, modular frontend architecture, and efficient interaction between the presentation layer and backend services.",
+   "challenges": "One of the key engineering considerations was collaborating across distributed teams while integrating with backend APIs maintained by another engineering group. Frontend development required designing reusable components that could efficiently interact with existing services, maintain consistent user experiences, and support the continuous evolution of a large production platform.",
+   "lessons_learned": "Working on a large production platform strengthened my experience in building maintainable frontend architecture, creating reusable UI systems, integrating APIs, optimizing application performance, and collaborating effectively within international engineering teams. It also reinforced the importance of writing scalable code that remains easy to maintain as products continue to evolve.",
+   "metrics": {
+    "My Role": "Full Stack Web Developer",
+    "Duration": "19 Months",
+    "Team Size": "8 Members",
+    "My Contribution": "25%",
+    "Performance Score": "98/100",
+    "Active Users": "4,000+"
+   },
+   "techs": [
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Docker",
+    "Linux",
+    "Git"
+   ],
+   "links": [
+    [
+     "https://kas.all-inkl.com/",
+     "fas fa-external-link-alt"
+    ]
+   ],
+   "gallery": []
+  },
+  "ar": {
+   "title": "KAS – لوحة إدارة السرفرات",
+   "hero_image": "/assets/uploads/1784566556_1777756893_unternehmensportrait_startscreen.jpg",
+   "company": "ALL-INKL.com",
+   "section": "المشاريع المهنية",
+   "status": "مكتمل",
+   "tags": [
+    "تطبيق ويب",
+    "لوحة تحكم"
+   ],
+   "description": "KAS هي منصة إدارة الاستضافة الخاصة بشركة ALL-INKL، وتوفر للعملاء واجهة مركزية لإدارة خدمات الاستضافة، وإدارة النطاقات، والبريد الإلكتروني، وقواعد البيانات، وغيرها من خدمات الاستضافة.\n\n\n\nعلى مدار ما يقارب عامًا ونصف، شاركت ضمن فريق هندسي دولي بين دبي وألمانيا في تطوير الجيل الجديد من المنصة. شمل عملي تصميم وتنفيذ واجهات مستخدم جديدة، وتطوير مكونات قابلة لإعادة الاستخدام، والمساهمة في تطوير الخلفية باستخدام PHP التقليدية، والتكامل مع واجهات برمجة التطبيقات الداخلية، بالإضافة إلى تحسين الأداء وتجربة المستخدم بشكل مستمر.\n\n\n\nساهمت في تطوير العديد من المكونات والميزات مثل الجداول القابلة لإعادة الاستخدام، ونظام الترقيم (Pagination)، وأدوات التلميحات (Tooltips)، ونظام الإشعارات، ومولد كلمات المرور، ومبدلات اللغة والثيم، وميزات البحث والتصفية، والتصميم المتجاوب، بالإضافة إلى تطوير إطار CSS داخلي لتوحيد واجهات المستخدم. كما شاركت في تطوير سكربتات الأتمتة، واختبار الميزات الجديدة، وتحسين الأداء، والمساهمة في استقرار المنصة أثناء تطورها المستمر.",
+   "problem": "مع تطور المنصة، ظهرت الحاجة إلى تحديث تجربة المستخدم، وتحسين اتساق الواجهات، وبناء مكونات قابلة لإعادة الاستخدام، وتبسيط سير العمل مع الحفاظ على التوافق مع خدمات البنية الخلفية الحالية.",
+   "solution": "تطوير مكونات واجهة حديثة وقابلة لإعادة الاستخدام، وتحسين سهولة استخدام لوحة التحكم، وإضافة ميزات تفاعلية جديدة، وربطها مع واجهات برمجة التطبيقات الداخلية، وتحسين الأداء، مع الحفاظ على كود منظم وقابل للتطوير.",
+   "architecture": "يعتمد النظام على بنية تطبيق تعتمد على PHP التقليدية في الخلفية وJavaScript التقليدية في الواجهة الأمامية. تتواصل الواجهة مع واجهات برمجة تطبيقات داخلية تم تطويرها بواسطة الفريق الهندسي في ألمانيا، مما أتاح تطوير ميزات جديدة مع الالتزام بسياسات حماية البيانات. كما يعتمد النظام على مكونات واجهة قابلة لإعادة الاستخدام وبنية منظمة تسهل صيانة التطبيق وتطويره.",
+   "challenges": "من أبرز التحديات التقنية العمل ضمن فرق هندسية موزعة والتكامل مع واجهات برمجة تطبيقات يتم تطويرها وصيانتها بواسطة فريق آخر. تطلب ذلك تصميم مكونات قابلة لإعادة الاستخدام، وضمان التكامل السلس مع الخدمات الحالية، والحفاظ على تجربة مستخدم متناسقة داخل منصة إنتاج كبيرة.",
+   "lessons_learned": "من خلال العمل على منصة إنتاج كبيرة، اكتسبت خبرة أعمق في بناء واجهات قابلة للصيانة، وتطوير مكونات قابلة لإعادة الاستخدام، والتكامل مع واجهات برمجة التطبيقات، وتحسين الأداء، والعمل ضمن فرق هندسية دولية. كما عزز المشروع أهمية كتابة كود منظم وقابل للتوسع مع تطور المنتجات على المدى الطويل.",
+   "metrics": {
+    "دوري": "مطور ويب متكامل",
+    "حجم الفريق": "8 أعضاء",
+    "نسبة مساهمتي": "25%",
+    "مؤشر الأداء (Lighthouse)": "98/100",
+    "عدد المستخدمين": "4,000+"
+   },
+   "techs": [
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Docker",
+    "Linux",
+    "Git"
+   ],
+   "links": [
+    [
+     "https://kas.all-inkl.com/",
+     "fas fa-external-link-alt"
+    ]
+   ],
+   "gallery": []
+  }
+ },
+ "monymonk": {
+  "en": {
+   "title": "MonyMonk",
+   "hero_image": "/assets/uploads/1788357566_Screenshot 2026-08-26 at 10.57.33 PM.png",
+   "company": "MonyMonk",
+   "section": "Featured Projects",
+   "status": "Completed",
+   "tags": [
+    "Web App",
+    "Dashboard"
+   ],
+   "description": "",
+   "problem": "Currency-exchange businesses need to track money moving between themselves and clients across multiple currencies without incorrectly collapsing everything into a single base-currency balance.",
+   "solution": "A bilingual financial ledger system for recording movements, currency exchanges, client balances, accounts, reconciliation, statements and audit history.",
+   "metrics": {
+    "My Role": "Full product development",
+    "Team Size": "1 Members",
+    "My Contribution": "100%",
+    "Performance Score": "100/100"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "MySQL",
+    "MongoDB",
+    "Docker",
+    "Git",
+    "GitHub",
+    "Cloudflare"
+   ],
+   "links": [
+    [
+     "https://monymonk.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/money_exchange_manager-",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1788357568_Screenshot 2026-08-26 at 10.57.33 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.44.45 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.01 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.19 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.30 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.52 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.47.17 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.04 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.22 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.32 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.56 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.08 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.22 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.35 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.52 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.50.05 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.50.19 PM.png"
+   ]
+  },
+  "ar": {
+   "title": "MonyMonk",
+   "hero_image": "/assets/uploads/1788357566_Screenshot 2026-08-26 at 10.57.33 PM.png",
+   "company": "MonyMonk",
+   "section": "المشاريع المميزة",
+   "status": "مكتمل",
+   "tags": [
+    "تطبيق ويب",
+    "لوحة تحكم"
+   ],
+   "description": "",
+   "problem": "تحتاج شركات صرف العملات إلى تتبع الأموال التي تنتقل بينها وبين العملاء عبر عملات متعددة دون دمج كل شيء بشكل خاطئ في رصيد عملة أساسية واحدة.",
+   "solution": "نظام دفتر حسابات مالي ثنائي اللغة لتسجيل الحركات، وتبادل العملات، وأرصدة العملاء، والحسابات، والتسويات، والبيانات، وسجل التدقيق.",
+   "metrics": {
+    "دوري": "تطوير المنتج بالكامل",
+    "حجم الفريق": "1 أعضاء",
+    "نسبة مساهمتي": "100%",
+    "مؤشر الأداء (Lighthouse)": "100/100"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "MySQL",
+    "MongoDB",
+    "Docker",
+    "Git",
+    "GitHub",
+    "Cloudflare"
+   ],
+   "links": [
+    [
+     "https://monymonk.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/money_exchange_manager-",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1788357568_Screenshot 2026-08-26 at 10.57.33 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.44.45 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.01 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.19 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.30 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.45.52 PM.png",
+    "/assets/uploads/1788357568_Screenshot 2026-09-02 at 5.47.17 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.04 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.22 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.32 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.48.56 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.08 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.22 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.35 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.49.52 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.50.05 PM.png",
+    "/assets/uploads/1788357569_Screenshot 2026-09-02 at 5.50.19 PM.png"
+   ]
+  }
+ },
+ "super-speed": {
+  "en": {
+   "title": "Super Speed",
+   "hero_image": "/assets/uploads/1786123688_Screenshot 2026-08-07 at 8.31.55 PM.png",
+   "company": "Super Speed",
+   "section": "Personal Projects",
+   "status": "Completed",
+   "tags": [],
+   "description": "Super Speed Security is a custom full-stack web application developed for a security and cash-in-transit services company.\n\n\n\nI designed and developed the entire application from scratch using native PHP, MySQL, PDO, and vanilla JavaScript, following a lightweight MVC-inspired / Front Controller architecture.\n\n\n\nA major part of the project is a custom visual content management system built directly into the website.\n\n\n\nInstead of requiring administrators to open a traditional CMS dashboard, authorized users can browse the website normally and simply right-click on editable content.\n\n\n\nDepending on the selected element, the CMS allows them to:\n\n\n\nEdit text directly\n\nReplace images\n\nReplace videos\n\nUpdate bilingual English and Arabic content\n\nManage visual assets without modifying source code\n\nSee their changes directly within the page they are editing\n\n\n\nThis creates a WYSIWYG-style editing experience where the website itself becomes the content-management interface.\n\n\n\nThe application also contains a dedicated admin and editor management system. Administrators can create additional users and give other team members access to edit website content without sharing a single administrator account.\n\n\n\nThe system combines database-driven content, multilingual support, secure authentication, media management, responsive design, RTL support, and asynchronous JavaScript communication with the PHP backend.\n\n\n\nThe result is not simply a corporate website, but a lightweight custom CMS platform tailored specifically to the client's workflow.",
+   "problem": "Super Speed needed more than a traditional static corporate website.\n\n\n\nThe company required a professional digital presence capable of presenting security, VIP protection, facility protection, event security, cash-in-transit, secure transportation, vault storage, and related services to both Arabic- and English-speaking customers.\n\n\n\nThe website also needed to remain maintainable after delivery.\n\n\n\nThe company needed the ability to change marketing copy, images, videos, client logos, and other content without modifying source code or contacting a developer for every update.\n\n\n\nAnother important constraint was deploying the application to the client's existing hosting infrastructure without introducing unnecessary framework complexity or server requirements.",
+   "solution": "I developed a custom CMS rather than integrating WordPress or another third-party content-management platform.\n\n\n\nThe central idea was to remove the separation between the website and its administration interface.\n\n\n\nWhen an authenticated editor visits the website, editable elements become manageable directly within their normal page context.\n\n\n\nA right-click interaction identifies the selected CMS element and opens the appropriate editing controls.\n\n\n\nFor example:\n\n\n\nText\n\n\n\nRight-clicking editable text allows the editor to change its content.\n\n\n\nImages\n\n\n\nRight-clicking an editable image allows it to be replaced with another image.\n\n\n\nVideos\n\n\n\nEditable video content can similarly be replaced without touching the underlying source code.\n\n\n\nJavaScript handles the interactive editing experience and communicates with PHP endpoints asynchronously. PHP validates the request, processes the content or uploaded media, and persists the changes in MySQL or managed storage.\n\n\n\nBecause the content is database-driven, the same CMS architecture also supports both English and Arabic.\n\n\n\nA separate administration system manages authorized users, allowing administrators to add additional editors who can maintain the website.\n\n\n\nThis gives the client control of their website while keeping the underlying application lightweight and custom-built.",
+   "architecture": "Public / Presentation Layer\n\n\n\nPHP views render the normal bilingual website.\n\n\n\nCMS Interaction Layer\n\n\n\nVanilla JavaScript detects editable elements and handles:\n\n\n\nRight-click/context-menu events\n\nElement identification\n\nText editing\n\nImage replacement\n\nVideo replacement\n\nFetch API requests\n\nUpdating the rendered page after successful changes\n\nPHP Application Layer\n\n\n\nPHP endpoints receive CMS requests and perform:\n\n\n\nAuthentication checks\n\nRequest validation\n\nContent updates\n\nFile processing\n\nDatabase operations\n\nMedia replacement\n\nData Layer\n\n\n\nMySQL stores database-driven content and application information using PDO.\n\n\n\nMedia Layer\n\n\n\nUploaded images and videos are validated, stored and associated with the correct content entries.\n\n\n\nAdministration Layer\n\n\n\nAuthenticated administration functionality manages users who are permitted to access the CMS and edit website content.",
+   "challenges": "Building context-aware editing\n\n\n\nOne of the main technical challenges was connecting visual elements rendered on the frontend to their corresponding stored content.\n\n\n\nThe CMS needed to identify exactly which text, image, or video the administrator selected and map that element to the correct stored content.\n\n\n\nJavaScript handles the context-menu interaction and identifies the editable element, while the PHP backend processes and persists the requested change.\n\n\n\nSupporting different content types\n\n\n\nText updates and media replacements require different workflows.\n\n\n\nThe CMS therefore needed to distinguish between content types and provide the correct editing experience and backend processing for each one.\n\n\n\nMaintaining the editing experience across languages\n\n\n\nBecause the website supports both English and Arabic, the CMS also had to associate edits with the correct language version while preserving the same page architecture.\n\n\n\nDesigning editing for non-technical users\n\n\n\nThe biggest UX goal was removing the need for administrators to understand a CMS hierarchy.\n\n\n\nInstead of:\n\n\n\nDashboard → Pages → Find Page → Find Section → Find Field → Edit\n\n\n\nthe workflow becomes:\n\n\n\nOpen Page → Find Content → Right Click → Edit",
+   "lessons_learned": "This project reinforced the importance of selecting architecture based on the actual problem rather than automatically choosing the largest available framework.\n\n\n\nA structured native PHP application can remain clean and maintainable when responsibilities such as persistence, content retrieval, media storage, routing, and presentation are intentionally separated.\n\n\n\nI also gained deeper experience designing editable multilingual applications where content should be treated as structured application data rather than static text embedded inside templates.\n\n\n\nBuilding the inline CMS highlighted the value of designing administration tools around the user's workflow. Allowing a client to edit the actual page they are viewing can provide a significantly simpler experience than requiring them to understand a traditional CMS dashboard.\n\n\n\nThe project also strengthened my experience with secure file handling, authentication, PDO, asynchronous JavaScript communication, RTL interfaces, environment-aware development, and deploying custom PHP applications to traditional hosting infrastructure.",
+   "metrics": {
+    "My Role": "Sole Full-Stack Developer & Designer",
+    "Team Size": "1 Members",
+    "My Contribution": "100%",
+    "Performance Score": "95/100"
+   },
+   "techs": [
+    "PHP",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Git",
+    "GitHub",
+    "Cloudflare"
+   ],
+   "links": [
+    [
+     "https://dev.super-speed-service.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/super-speed-security",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.31.40 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.31.55 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.16 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.35 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.52 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.12 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.24 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.48 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.57 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.17 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.29 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.41 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.53 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.35.24 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.35.53 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.36.10 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.36.44 PM.png"
+   ]
+  },
+  "ar": {
+   "title": "Super Speed",
+   "hero_image": "/assets/uploads/1786123688_Screenshot 2026-08-07 at 8.31.55 PM.png",
+   "company": "Super Speed",
+   "section": "المشاريع الشخصية",
+   "status": "مكتمل",
+   "tags": [],
+   "description": "Super Speed Security هو تطبيق ويب Full-Stack مخصص تم تطويره لشركة تعمل في مجال خدمات الأمن ونقل الأموال.\n\n\n\nقمت بتصميم وتطوير التطبيق بالكامل من الصفر باستخدام PHP Native وMySQL وPDO وVanilla JavaScript مع بنية خفيفة مستوحاة من MVC وFront Controller.\n\n\n\nأحد أهم أجزاء المشروع هو نظام إدارة محتوى مرئي تم دمجه مباشرة داخل الموقع.\n\n\n\nبدلاً من إجبار المسؤول على الدخول إلى لوحة CMS تقليدية والبحث عن الصفحة أو العنصر الذي يريد تعديله، يمكن للمستخدم المصرح له تصفح الموقع بشكل طبيعي ثم الضغط بزر الفأرة الأيمن على المحتوى الذي يريد تعديله.\n\n\n\nبحسب نوع العنصر، يستطيع المستخدم:\n\n\n\nتعديل النصوص مباشرة\n\nاستبدال الصور\n\nاستبدال الفيديوهات\n\nتعديل المحتوى العربي والإنجليزي\n\nإدارة الوسائط بدون تعديل الكود\n\nمشاهدة التعديل مباشرة داخل نفس الصفحة\n\n\n\nبهذه الطريقة يصبح الموقع نفسه هو واجهة إدارة المحتوى، مما يوفر تجربة تعديل مرئية وبسيطة للمستخدمين غير التقنيين.\n\n\n\nيحتوي التطبيق أيضاً على نظام لإدارة المسؤولين والمحررين يسمح للمسؤول بإضافة مستخدمين جدد ومنح أعضاء آخرين في الفريق صلاحية إدارة وتعديل محتوى الموقع دون مشاركة حساب إداري واحد.\n\n\n\nيجمع النظام بين إدارة المحتوى من قاعدة البيانات، ودعم اللغات، ونظام Authentication، وإدارة الوسائط، والتصميم المتجاوب، ودعم RTL، والتواصل غير المتزامن بين JavaScript وPHP.\n\n\n\nلذلك فالمشروع ليس مجرد موقع شركة، بل منصة CMS مخصصة تم تصميمها بالكامل لتناسب طريقة عمل العميل.",
+   "problem": "كانت شركة Super Speed بحاجة إلى أكثر من مجرد موقع تعريفي ثابت.\n\n\n\nاحتاجت الشركة إلى منصة احترافية لعرض خدمات الأمن وحماية الشخصيات والمنشآت والفعاليات ونقل الأموال والنقل الآمن والتخزين والخدمات المرتبطة بها للعملاء الناطقين باللغة العربية والإنجليزية.\n\n\n\nكما كان من الضروري أن تتمكن الشركة من إدارة الموقع بعد تسليمه.\n\n\n\nكان العميل بحاجة إلى تعديل النصوص والصور والفيديوهات وشعارات العملاء والمحتوى التسويقي دون تعديل الكود أو الاعتماد على المطور في كل تحديث.\n\n\n\nبالإضافة إلى ذلك، كان يجب أن يعمل النظام على بيئة الاستضافة الحالية الخاصة بالعميل دون إضافة تعقيدات أو متطلبات غير ضرورية ناتجة عن استخدام Framework كبير.",
+   "solution": "بدلاً من استخدام WordPress أو CMS جاهز، قمت ببناء نظام إدارة محتوى مخصص بالكامل داخل التطبيق.\n\n\n\nكانت الفكرة الأساسية هي إزالة الفصل التقليدي بين الموقع ولوحة الإدارة.\n\n\n\nعندما يقوم المستخدم المصرح له بتسجيل الدخول وتصفح الموقع، يمكنه إدارة العناصر مباشرة داخل الصفحة التي يشاهدها.\n\n\n\nيتم استخدام Right Click على العنصر المطلوب لتحديده وفتح أدوات التعديل المناسبة.\n\n\n\nالنصوص\n\n\n\nيمكن الضغط بزر الفأرة الأيمن على النص وتعديل المحتوى مباشرة.\n\n\n\nالصور\n\n\n\nيمكن الضغط على الصورة واستبدالها بصورة جديدة.\n\n\n\nالفيديوهات\n\n\n\nيمكن استبدال ملفات الفيديو بالطريقة نفسها دون الحاجة إلى تعديل الكود.\n\n\n\nيتولى JavaScript تجربة التعديل داخل الواجهة والتواصل مع PHP بشكل غير متزامن.\n\n\n\nيقوم Backend بعد ذلك بالتحقق من الطلب ومعالجة المحتوى أو الملفات وحفظ التغييرات داخل MySQL أو نظام تخزين الوسائط.\n\n\n\nوبما أن المحتوى يعتمد على قاعدة البيانات، فإن نفس النظام يدعم المحتوى باللغتين العربية والإنجليزية.\n\n\n\nكما يحتوي التطبيق على نظام منفصل لإدارة المستخدمين يسمح للمسؤول بإضافة محررين آخرين ومنحهم إمكانية إدارة محتوى الموقع.",
+   "architecture": "طبقة العرض/الواجهة العامة\n\n\n\nتقوم واجهات PHP بعرض الموقع الإلكتروني ثنائي اللغة بشكل طبيعي.\n\n\n\nطبقة التفاعل مع نظام إدارة المحتوى (CMS)\n\n\n\nتكتشف جافا سكريبت العناصر القابلة للتعديل وتتعامل معها:\n\n\n\nأحداث النقر بزر الماوس الأيمن/قائمة السياق\n\nتحديد العنصر\n\nتحرير النصوص\n\nاستبدال الصور\n\nاستبدال مقاطع الفيديو\n\nجلب طلبات واجهة برمجة التطبيقات (API)\n\nتحديث الصفحة المعروضة بعد إتمام التغييرات بنجاح.\n\nطبقة تطبيق PHP\n\n\n\nتستقبل نقاط نهاية PHP طلبات نظام إدارة المحتوى (CMS) وتنفذ ما يلي:\n\n\n\nالتحقق من المصادقة\n\nالتحقق من صحة الطلب\n\nتحديثات المحتوى\n\nمعالجة الملفات\n\nعمليات قاعدة البيانات\n\nاستبدال الوسائط.\n\nطبقة البيانات\n\n\n\nيخزن MySQL المحتوى المُستمد من قاعدة البيانات ومعلومات التطبيق باستخدام PDO.\n\n\n\nطبقة الوسائط\n\n\n\nيتم التحقق من صحة الصور ومقاطع الفيديو المُحمّلة، وتخزينها، وربطها بإدخالات المحتوى الصحيحة.\n\n\n\nطبقة الإدارة\n\n\n\nتدير وظائف الإدارة المُصادق عليها المستخدمين المصرح لهم بالوصول إلى نظام إدارة المحتوى (CMS) وتعديل محتوى الموقع الإلكتروني.",
+   "challenges": "بناء نظام تحرير مُراعي للسياق\n\n\n\nكان أحد التحديات التقنية الرئيسية هو ربط العناصر المرئية المعروضة في واجهة المستخدم بالمحتوى المُخزّن المُناسب لها.\n\n\n\nكان على نظام إدارة المحتوى (CMS) تحديد النص أو الصورة أو الفيديو الذي اختاره المسؤول بدقة، وربط هذا العنصر بالمحتوى المُخزّن الصحيح.\n\n\n\nتتولى لغة جافا سكريبت التفاعل مع قائمة السياق وتحديد العنصر القابل للتحرير، بينما يقوم نظام PHP في الواجهة الخلفية بمعالجة التغيير المطلوب وحفظه.\n\n\n\nدعم أنواع المحتوى المختلفة\n\n\n\nتتطلب تحديثات النصوص واستبدال الوسائط سير عمل مختلفًا.\n\n\n\nلذا، كان على نظام إدارة المحتوى التمييز بين أنواع المحتوى وتوفير تجربة التحرير المناسبة ومعالجة الواجهة الخلفية لكل نوع.\n\n\n\nالحفاظ على تجربة التحرير عبر اللغات\n\n\n\nنظرًا لأن الموقع يدعم اللغتين الإنجليزية والعربية، كان على نظام إدارة المحتوى أيضًا ربط التعديلات بنسخة اللغة الصحيحة مع الحفاظ على بنية الصفحة نفسها.\n\n\n\nتصميم نظام تحرير سهل الاستخدام للمستخدمين غير التقنيين\n\n\n\nكان الهدف الأهم في تجربة المستخدم هو تبسيط فهم المسؤولين لهيكل نظام إدارة المحتوى.\n\n\n\nبدلاً من:\n\n\n\nلوحة التحكم ← الصفحات ← البحث عن صفحة ← البحث عن قسم ← البحث عن حقل ← تحرير\n\n\n\nيصبح سير العمل كالتالي:\n\n\n\nفتح الصفحة ← البحث عن محتوى ← النقر بزر الماوس الأيمن ← تحرير",
+   "lessons_learned": "أكد لي هذا المشروع أهمية اختيار بنية التطبيق بناءً على المشكلة الفعلية بدلاً من استخدام أكبر Framework متاح بشكل تلقائي.\n\n\n\nيمكن لتطبيق مبني باستخدام PHP Native أن يكون منظماً وسهل الصيانة إذا تم فصل المسؤوليات مثل قاعدة البيانات والمحتوى والوسائط والـ Routing وعرض الصفحات بشكل صحيح.\n\n\n\nكما اكتسبت خبرة أكبر في تصميم تطبيقات متعددة اللغات يكون فيها المحتوى جزءاً من بيانات النظام وليس مجرد نص ثابت داخل صفحات HTML.\n\n\n\nساعدني تطوير Inline CMS أيضاً على فهم أهمية تصميم أدوات الإدارة بناءً على طريقة استخدام العميل الفعلية. السماح للعميل بتعديل الصفحة التي يشاهدها مباشرة يوفر تجربة أبسط بكثير من إجباره على تعلم لوحة CMS تقليدية.\n\n\n\nكما عزز المشروع خبرتي في إدارة الملفات بشكل آمن، Authentication، PDO، الاتصال غير المتزامن باستخدام JavaScript، دعم RTL، بيئات التطوير المختلفة، ونشر تطبيقات PHP مخصصة على الاستضافات التقليدية.",
+   "metrics": {
+    "دوري": "المطور والمصمم Full-Stack المسؤول عن المشروع بالكامل",
+    "حجم الفريق": "1 أعضاء",
+    "نسبة مساهمتي": "100%",
+    "مؤشر الأداء (Lighthouse)": "95/100"
+   },
+   "techs": [
+    "PHP",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Git",
+    "GitHub",
+    "Cloudflare"
+   ],
+   "links": [
+    [
+     "https://dev.super-speed-service.com/",
+     "fas fa-external-link-alt"
+    ],
+    [
+     "https://github.com/Oelsayed99/super-speed-security",
+     "fab fa-github"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.31.40 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.31.55 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.16 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.35 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.32.52 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.12 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.24 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.48 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.33.57 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.17 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.29 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.41 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.34.53 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.35.24 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.35.53 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.36.10 PM.png",
+    "/assets/uploads/1786123689_Screenshot 2026-08-07 at 8.36.44 PM.png"
+   ]
+  }
+ },
+ "yaxigo-international-travel-booking-platform": {
+  "en": {
+   "title": "YaxiGo – International Travel Booking Platform",
+   "hero_image": "/assets/uploads/1784720212_ChatGPT Image Jul 3, 2026, 03_31_13 PM.png",
+   "company": "YaxiGo",
+   "section": "Currently Building",
+   "status": "In Progress",
+   "tags": [],
+   "description": "YaxiGo is a full-stack travel booking platform currently under active development. The project is designed around clean architecture principles to support multiple transportation providers, payment gateways, and future expansion into additional travel services.\n\n\n\nThe application focuses on maintainability, scalability, localization, and security from the start. Instead of tightly coupling business logic to a single provider, the system uses abstraction layers that allow providers and payment gateways to be added or replaced with minimal changes.\n\n\n\nThe platform includes multilingual support (English and Arabic), RTL compatibility, customer authentication, booking management, role-based permissions, audit logging, and an administration panel for managing operations. The infrastructure is designed to support production deployment and long-term growth.",
+   "problem": "Many travel booking systems are tightly coupled to a single provider, making future integrations expensive and difficult. They also lack proper localization, scalable architecture, and administrative tools required for international operations.",
+   "solution": "Design a modular booking platform using Laravel with provider abstraction, payment gateway abstraction, multilingual support, and a scalable domain-driven architecture capable of supporting future transportation services.",
+   "architecture": "The application follows a layered architecture separating presentation, business logic, domain services, and infrastructure. Provider integrations and payment gateways are implemented using interfaces and interchangeable adapters, reducing coupling and improving maintainability. Localization, authorization, and notifications are implemented as independent modules to encourage scalability.",
+   "challenges": "Designing provider-agnostic booking workflows\n\nBuilding scalable booking state management\n\nSupporting Arabic RTL and English localization\n\nStructuring a maintainable Laravel architecture\n\nManaging complex booking relationships\n\nCreating extensible payment integrations\n\nProduction deployment using OpenLiteSpeed\n\nPerformance optimization and caching strategy",
+   "lessons_learned": "Developing YaxiGo reinforced the importance of designing software around long-term maintainability rather than short-term implementation. The project improved my understanding of system architecture, domain modeling, deployment automation, localization, and scalable backend design while balancing current business needs with future expansion.",
+   "metrics": {
+    "My Role": "Full Stack Developer & UI/UX Designer",
+    "Team Size": "1 Members",
+    "My Contribution": "100%",
+    "Performance Score": "95/100",
+    "Active Users": "500+"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Docker",
+    "Git",
+    "GitHub"
+   ],
+   "links": [
+    [
+     "https://yaxigo.elsayedomar.com/",
+     "fas fa-external-link-alt"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.11.45 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.11.53 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.12.04 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.12.17 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.29 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.36 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.43 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.49 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.57 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.28.50 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.28.57 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.04 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.15 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.25 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.31 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.40 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.49 PM.png"
+   ]
+  },
+  "ar": {
+   "title": "YaxiGo – منصة حجز السفر الدولي",
+   "hero_image": "/assets/uploads/1784720212_ChatGPT Image Jul 3, 2026, 03_31_13 PM.png",
+   "company": "YaxiGo",
+   "section": "مشاريع قيد التطوير",
+   "status": "قيد التطوير",
+   "tags": [],
+   "description": "YaxiGo هي منصة متكاملة لحجز الرحلات قيد التطوير، تم تصميمها باستخدام مبادئ الهندسة البرمجية الحديثة لضمان القابلية للتوسع وسهولة الصيانة.\n\n\n\nتعتمد المنصة على بنية مرنة تسمح بإضافة مزودي خدمات النقل وبوابات الدفع بسهولة دون الحاجة إلى إعادة بناء النظام. كما تدعم اللغتين العربية والإنجليزية، واتجاه RTL، وإدارة المستخدمين، وتتبع الحجوزات، والصلاحيات، وسجل العمليات، ولوحة تحكم إدارية.",
+   "problem": "تعتمد العديد من منصات الحجز على مزود خدمة واحد، مما يجعل التوسع أو إضافة مزودين جدد عملية معقدة ومكلفة، بالإضافة إلى ضعف دعم تعدد اللغات والإدارة.",
+   "solution": "بناء منصة مرنة تعتمد على Laravel مع طبقات تجريد لمزودي الخدمات وبوابات الدفع، ودعم كامل لتعدد اللغات، وبنية قابلة للتوسع لاستيعاب خدمات إضافية مستقبلاً.",
+   "architecture": "يعتمد النظام على معمارية متعددة الطبقات تفصل بين واجهة المستخدم ومنطق الأعمال والبنية التحتية. كما يتم تنفيذ تكاملات مزودي الخدمات وبوابات الدفع باستخدام واجهات مجردة (Interfaces) لتسهيل التوسع والصيانة.",
+   "challenges": "تصميم نظام مستقل عن مزود الخدمة\n\nإدارة حالات الحجز\n\nدعم العربية والإنجليزية\n\nبناء هيكل Laravel قابل للتوسع\n\nإدارة العلاقات المعقدة داخل قاعدة البيانات\n\nتصميم تكاملات الدفع\n\nالنشر باستخدام OpenLiteSpeed\n\nتحسين الأداء",
+   "lessons_learned": "ساهم المشروع في تعميق فهمي لتصميم الأنظمة القابلة للتوسع، ونمذجة الأعمال، وإدارة عمليات النشر، ودعم تعدد اللغات، وأهمية بناء حلول مرنة يمكن تطويرها مستقبلاً دون الحاجة إلى إعادة هيكلة النظام.",
+   "metrics": {
+    "دوري": "مطور برامج متكامل و مصمم واجهات",
+    "حجم الفريق": "1 أعضاء",
+    "نسبة مساهمتي": "100%",
+    "مؤشر الأداء (Lighthouse)": "95/100",
+    "عدد المستخدمين": "500+"
+   },
+   "techs": [
+    "PHP",
+    "Laravel",
+    "JavaScript",
+    "HTML5/CSS3",
+    "SQL",
+    "MySQL",
+    "Docker",
+    "Git",
+    "GitHub"
+   ],
+   "links": [
+    [
+     "https://yaxigo.elsayedomar.com/",
+     "fas fa-external-link-alt"
+    ]
+   ],
+   "gallery": [
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.11.45 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.11.53 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.12.04 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.12.17 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.29 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.36 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.43 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.49 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.13.57 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.28.50 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.28.57 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.04 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.15 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.25 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.31 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.40 PM.png",
+    "/assets/uploads/1784720212_Screenshot 2026-07-22 at 3.29.49 PM.png"
+   ]
+  }
+ }
+}
