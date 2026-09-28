@@ -8,3 +8,6 @@ translations.db
 *.avi
 *.mkv
 
+
+# Private notes (brand guide, claim rules) — keep out of the public repo
+docs/
