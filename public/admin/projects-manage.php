@@ -105,6 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_project'])) {
             'performance_score' => (int)($_POST['performance_score'] ?? 90),
             'completion_percentage' => (int)($_POST['completion_percentage'] ?? 100),
             'display_order' => (int)($_POST['display_order'] ?? 0),
+            // Shown on the Journey timeline when set; must be a real Y-m-d date
+            'timeline_date' => preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['timeline_date'] ?? '') ? $_POST['timeline_date'] : null,
             'seo_title_en' => $_POST['seo_title_en'] ?? '',
             'seo_title_ar' => $_POST['seo_title_ar'] ?? '',
             'seo_description_en' => $_POST['seo_description_en'] ?? '',
@@ -258,6 +260,10 @@ admin_header("Project Management", "projects");
                     <div class="admin-form-group">
                         <label>Display Order</label>
                         <input type="number" name="display_order" class="admin-form-control" value="<?= htmlspecialchars($p['display_order'] ?? 0) ?>">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Timeline date (shows this project on the Journey page; clear to hide it)</label>
+                        <input type="date" name="timeline_date" class="admin-form-control" value="<?= htmlspecialchars(empty($p['id']) ? date('Y-m-d') : ($p['timeline_date'] ?? '')) ?>">
                     </div>
                 </div>
             </div>

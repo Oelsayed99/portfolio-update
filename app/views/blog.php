@@ -47,6 +47,26 @@ $story = [1 => '01-egypt', 2 => '02-india', 3 => '03-return', 4 => '04-dubai', 5
 $icons = ['project' => 'code', 'career' => 'briefcase', 'cert' => 'certificate', 'learning' => 'graduation-cap'];
 $groups = ['project' => 'project', 'career' => 'career', 'cert' => 'learning', 'learning' => 'learning'];
 $lastYear = null;
+
+// One timeline: manual entries (Admin → Journey) + projects that have a timeline date (Admin → Projects)
+$months = $lang === 'ar'
+    ? ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$timeline = [];
+foreach ($journeyEntries as $j) {
+    $timeline[] = ['at' => $j['created_at'], 'type' => $j['tag_type'] ?: 'project', 'tag' => $j['tag_' . $lang],
+                   'date' => $j['date_' . $lang], 'title' => $j['title_' . $lang], 'text' => $j['description_' . $lang],
+                   'image' => $j['image'], 'href' => null];
+}
+foreach (app\models\Project::all(false) as $p) {
+    if (empty($p['timeline_date'])) continue;
+    $ts = strtotime($p['timeline_date']);
+    $timeline[] = ['at' => $p['timeline_date'], 'type' => 'project', 'tag' => translate('journey_tag_project'),
+                   'date' => $months[date('n', $ts) - 1] . ' ' . date('Y', $ts),
+                   'title' => $p['title_' . $lang] ?: $p['title_en'], 'text' => $p['short_description_' . $lang] ?: $p['short_description_en'],
+                   'image' => $p['thumbnail'], 'href' => '/projects/' . $p['slug']];
+}
+usort($timeline, fn($a, $b) => strcmp($b['at'], $a['at']));
 ?>
 <section class="journey-timeline" id="journey-timeline">
     <div class="container">
@@ -62,25 +82,26 @@ $lastYear = null;
         </div>
 
         <ol class="tl">
-            <?php foreach ($journeyEntries as $i => $j):
-                $type = $j['tag_type'] ?: 'project';
-                $year = substr($j['created_at'] ?? '', 0, 4);
+            <?php foreach ($timeline as $i => $e):
+                $type = $e['type'];
+                $year = substr($e['at'] ?? '', 0, 4);
                 if ($year && $year !== $lastYear): $lastYear = $year; ?>
                     <li class="tl-year reveal"><span><?= htmlspecialchars($year) ?></span></li>
                 <?php endif; ?>
                 <li class="tl-item tl-item--<?= $i % 2 ? 'end' : 'start' ?> reveal" data-group="<?= $groups[$type] ?? 'project' ?>">
                     <span class="tl-dot tl-dot--<?= htmlspecialchars($type) ?>"><i class="fas fa-<?= $icons[$type] ?? 'star' ?>"></i></span>
-                    <article class="tl-card">
-                        <?php if (!empty($j['image'])): ?>
-                            <img src="<?= htmlspecialchars($j['image']) ?>" alt="" class="tl-img" loading="lazy">
+                    <article class="tl-card<?= $e['href'] ? ' tl-card--link' : '' ?>">
+                        <?php if (!empty($e['image'])): ?>
+                            <img src="<?= htmlspecialchars($e['image']) ?>" alt="" class="tl-img" loading="lazy">
                         <?php endif; ?>
                         <div class="tl-body">
                             <div class="tl-meta">
-                                <span class="tl-tag tl-tag--<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($j['tag_' . $lang]) ?></span>
-                                <span class="tl-date"><?= htmlspecialchars($j['date_' . $lang]) ?></span>
+                                <span class="tl-tag tl-tag--<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($e['tag']) ?></span>
+                                <span class="tl-date"><?= htmlspecialchars($e['date']) ?></span>
                             </div>
-                            <h3><?= htmlspecialchars($j['title_' . $lang]) ?></h3>
-                            <p><?= htmlspecialchars($j['description_' . $lang]) ?></p>
+                            <h3><?php if ($e['href']): ?><a href="<?= htmlspecialchars($e['href']) ?>" class="card-link"><?= htmlspecialchars($e['title']) ?></a><?php else: ?><?= htmlspecialchars($e['title']) ?><?php endif; ?></h3>
+                            <p><?= htmlspecialchars($e['text']) ?></p>
+                            <?php if ($e['href']): ?><span class="card-cta"><?= t('card_cta') ?> <i class="fas fa-arrow-<?= $lang === 'ar' ? 'left' : 'right' ?>"></i></span><?php endif; ?>
                         </div>
                     </article>
                 </li>

@@ -169,6 +169,7 @@ try {
         demo_url VARCHAR(255) DEFAULT '',
         docs_url VARCHAR(255) DEFAULT '',
         figma_url VARCHAR(255) DEFAULT '',
+        timeline_date DATE NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY (section_id) REFERENCES project_sections(id) ON DELETE RESTRICT,

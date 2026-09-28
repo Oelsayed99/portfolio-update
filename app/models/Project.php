@@ -97,7 +97,7 @@ class Project extends Model {
             company_en, company_ar, client_en, client_ar, duration_en, duration_ar, team_size, contribution_percentage,
             countries_used, user_count, performance_score, completion_percentage, display_order,
             seo_title_en, seo_title_ar, seo_description_en, seo_description_ar, canonical_url, og_image, twitter_image, keywords, structured_data,
-            project_url, github_url, case_study_url, demo_url, docs_url, figma_url
+            project_url, github_url, case_study_url, demo_url, docs_url, figma_url, timeline_date
         ) VALUES (
             ?, ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?,
@@ -106,7 +106,7 @@ class Project extends Model {
             ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?, ?,
-            ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?
         )";
 
         self::query($sql, [
@@ -117,7 +117,7 @@ class Project extends Model {
             $data['company_en'] ?? '', $data['company_ar'] ?? '', $data['client_en'] ?? '', $data['client_ar'] ?? '', $data['duration_en'] ?? '', $data['duration_ar'] ?? '', $data['team_size'] ?? 1, $data['contribution_percentage'] ?? 100,
             $data['countries_used'] ?? '', $data['user_count'] ?? 0, $data['performance_score'] ?? 90, $data['completion_percentage'] ?? 100, $data['display_order'] ?? 0,
             $data['seo_title_en'] ?? '', $data['seo_title_ar'] ?? '', $data['seo_description_en'] ?? '', $data['seo_description_ar'] ?? '', $data['canonical_url'] ?? '', $data['og_image'] ?? '', $data['twitter_image'] ?? '', $data['keywords'] ?? '', $data['structured_data'] ?? '',
-            $data['project_url'] ?? '', $data['github_url'] ?? '', $data['case_study_url'] ?? '', $data['demo_url'] ?? '', $data['docs_url'] ?? '', $data['figma_url'] ?? ''
+            $data['project_url'] ?? '', $data['github_url'] ?? '', $data['case_study_url'] ?? '', $data['demo_url'] ?? '', $data['docs_url'] ?? '', $data['figma_url'] ?? '', ($data['timeline_date'] ?? null) ?: null
         ]);
 
         $projectId = self::connect()->lastInsertId();
@@ -151,7 +151,7 @@ class Project extends Model {
             company_en=?, company_ar=?, client_en=?, client_ar=?, duration_en=?, duration_ar=?, team_size=?, contribution_percentage=?,
             countries_used=?, user_count=?, performance_score=?, completion_percentage=?, display_order=?,
             seo_title_en=?, seo_title_ar=?, seo_description_en=?, seo_description_ar=?, canonical_url=?, og_image=?, twitter_image=?, keywords=?, structured_data=?,
-            project_url=?, github_url=?, case_study_url=?, demo_url=?, docs_url=?, figma_url=?
+            project_url=?, github_url=?, case_study_url=?, demo_url=?, docs_url=?, figma_url=?, timeline_date=?
             WHERE id=?";
 
         $result = self::query($sql, [
@@ -162,7 +162,7 @@ class Project extends Model {
             $data['company_en'] ?? '', $data['company_ar'] ?? '', $data['client_en'] ?? '', $data['client_ar'] ?? '', $data['duration_en'] ?? '', $data['duration_ar'] ?? '', $data['team_size'] ?? 1, $data['contribution_percentage'] ?? 100,
             $data['countries_used'] ?? '', $data['user_count'] ?? 0, $data['performance_score'] ?? 90, $data['completion_percentage'] ?? 100, $data['display_order'] ?? 0,
             $data['seo_title_en'] ?? '', $data['seo_title_ar'] ?? '', $data['seo_description_en'] ?? '', $data['seo_description_ar'] ?? '', $data['canonical_url'] ?? '', $data['og_image'] ?? '', $data['twitter_image'] ?? '', $data['keywords'] ?? '', $data['structured_data'] ?? '',
-            $data['project_url'] ?? '', $data['github_url'] ?? '', $data['case_study_url'] ?? '', $data['demo_url'] ?? '', $data['docs_url'] ?? '', $data['figma_url'] ?? '',
+            $data['project_url'] ?? '', $data['github_url'] ?? '', $data['case_study_url'] ?? '', $data['demo_url'] ?? '', $data['docs_url'] ?? '', $data['figma_url'] ?? '', ($data['timeline_date'] ?? null) ?: null,
             $id
         ]);
 
