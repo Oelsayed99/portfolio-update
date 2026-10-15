@@ -70,6 +70,9 @@ $router->add('projects/:slug', 'app\controllers\ProjectController', 'detail');
 $router->add('blog', 'app\controllers\BlogController', 'index');
 $router->add('services', 'app\controllers\ServicesController', 'index');
 $router->add('sitemap.xml', 'app\controllers\SitemapController', 'index');
+// Common addresses people (and Search Console suggestions) submit for the same sitemap
+$router->add('sitemap', 'app\controllers\SitemapController', 'index');
+$router->add('sitemap_index.xml', 'app\controllers\SitemapController', 'index');
 $router->add('contact', 'app\controllers\ContactController', 'index');
 $router->add('contact/submit', 'app\controllers\ContactController', 'submit');
 $router->add('lang', 'app\controllers\Controller', 'switchLang');
