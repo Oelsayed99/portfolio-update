@@ -53,9 +53,13 @@ class ProjectController extends Controller
         $title = $project['title_' . $lang] ?: $project['title_en'];
         $summary = $project['short_description_' . $lang] ?: $project['short_description_en'];
         $url = site_url('/projects/' . $project['slug']);
+        // Google shows ~60 characters of a title: drop the suffix, then "Case study", when they don't fit
+        $seoTitle = $title . ' — ' . translate('seo_case_study') . ' | Omar Elsayed';
+        if (mb_strlen($seoTitle) > 60) $seoTitle = $title . ' — ' . translate('seo_case_study');
+        if (mb_strlen($seoTitle) > 60) $seoTitle = clip($title, 60);
         $seo = [
-            'title' => ($project['seo_title_' . $lang] ?? '') ?: $title . ' — ' . translate('seo_case_study') . ' | Omar Elsayed',
-            'description' => ($project['seo_description_' . $lang] ?? '') ?: mb_substr($summary, 0, 160),
+            'title' => ($project['seo_title_' . $lang] ?? '') ?: $seoTitle,
+            'description' => ($project['seo_description_' . $lang] ?? '') ?: clip($summary, 155),
             'image' => $project['thumbnail'] ?: '/assets/images/brand/og-image.jpg',
             'type' => 'article',
             'jsonld' => [

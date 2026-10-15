@@ -77,6 +77,15 @@ function site_url($path = '') {
     return rtrim(getenv('SITE_URL') ?: 'https://elsayedomar.com', '/') . $path;
 }
 
+/** Short text for meta tags: whitespace flattened, cut at a word with an ellipsis. */
+function clip($text, $max) {
+    $flat = trim(preg_replace('/\s+/u', ' ', (string)$text));
+    if (mb_strlen($flat) <= $max) return $flat;
+    $cut = mb_substr($flat, 0, $max);
+    $space = mb_strrpos($cut, ' ');
+    return rtrim($space ? mb_substr($cut, 0, $space) : $cut, ' ,;:–—-') . '…';
+}
+
 function page_url($lang) {
     $path = '/' . trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '', '/');
     return site_url($path === '/' ? '/' : $path) . ($lang === 'ar' ? '?lang=ar' : '');

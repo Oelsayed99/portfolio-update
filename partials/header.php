@@ -10,7 +10,9 @@
     $seoPage = $active_page ?? 'home';
     $seoTitle = $seo['title'] ?? translate("seo_title_$seoPage");
     $seoDesc = $seo['description'] ?? translate("seo_desc_$seoPage");
-    $seoImage = site_url($seo['image'] ?? '/assets/images/brand/og-image.jpg');
+    $seoImagePath = $seo['image'] ?? '/assets/images/brand/og-image.jpg';
+    $seoImage = site_url($seoImagePath);
+    $seoImageSize = @getimagesize(BASE_PATH . '/public' . parse_url($seoImagePath, PHP_URL_PATH)) ?: null;
     $seoUrl = page_url($seoLang);
     $person = [
         '@type' => 'Person', '@id' => site_url('/#person'), 'name' => 'Omar Elsayed', 'url' => site_url('/'),
@@ -50,6 +52,11 @@
     <meta property="og:description" content="<?= htmlspecialchars($seoDesc) ?>">
     <meta property="og:url" content="<?= htmlspecialchars($seoUrl) ?>">
     <meta property="og:image" content="<?= htmlspecialchars($seoImage) ?>">
+    <?php if ($seoImageSize): ?>
+        <meta property="og:image:width" content="<?= $seoImageSize[0] ?>">
+        <meta property="og:image:height" content="<?= $seoImageSize[1] ?>">
+    <?php endif; ?>
+    <meta property="og:image:alt" content="<?= htmlspecialchars($seo['image_alt'] ?? $seoTitle) ?>">
     <meta property="og:locale" content="<?= $seoLang === 'ar' ? 'ar_AE' : 'en_US' ?>">
     <meta property="og:locale:alternate" content="<?= $seoLang === 'ar' ? 'en_US' : 'ar_AE' ?>">
     <meta name="twitter:card" content="summary_large_image">
