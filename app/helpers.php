@@ -7,8 +7,7 @@
 use app\models\Translation;
 
 function translate($msgid) {
-    $lang = $_SESSION['lang'] ?? $_COOKIE['lang'] ?? 'en';
-    return Translation::get($msgid, $lang);
+    return Translation::get($msgid, get_current_lang());
 }
 
 /**
@@ -28,7 +27,7 @@ function t($msgid) {
     $text = translate($msgid);
 
     if (is_editor_mode()) {
-        $lang = $_SESSION['lang'] ?? $_COOKIE['lang'] ?? 'en';
+        $lang = get_current_lang();
         $data = Translation::getWithEn($msgid, $lang);
         $en_text = $data['en'] ?? $msgid;
 
@@ -62,7 +61,25 @@ function asset($path) {
  * Language Switcher Helper
  */
 function get_current_lang() {
-    return $_SESSION['lang'] ?? $_COOKIE['lang'] ?? 'en';
+    // ?lang= first (crawlable Arabic URLs), then the visitor's saved choice.
+    // Whitelisted: the value is used as a column name in Translation queries.
+    foreach ([$_GET['lang'] ?? null, $_SESSION['lang'] ?? null, $_COOKIE['lang'] ?? null] as $lang) {
+        if ($lang === 'en' || $lang === 'ar') return $lang;
+    }
+    return 'en';
+}
+
+/**
+ * SEO: the site's canonical origin, and this page's address in a given language
+ * (English has no parameter, Arabic is ?lang=ar).
+ */
+function site_url($path = '') {
+    return rtrim(getenv('SITE_URL') ?: 'https://elsayedomar.com', '/') . $path;
+}
+
+function page_url($lang) {
+    $path = '/' . trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '', '/');
+    return site_url($path === '/' ? '/' : $path) . ($lang === 'ar' ? '?lang=ar' : '');
 }
 
 function is_rtl() {

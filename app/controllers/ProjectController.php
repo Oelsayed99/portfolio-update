@@ -36,9 +36,7 @@ class ProjectController extends Controller
     {
         $project = Project::findBySlug($slug);
         if (!$project || $project['visibility'] === 'archived') {
-            http_response_code(404);
-            echo "<h1>404 Not Found</h1><p>Project study not found.</p>";
-            exit;
+            \app\Router::abort(404, "Project '$slug' not found");
         }
 
         // Get related projects (same section, limit 3)
@@ -51,9 +49,32 @@ class ProjectController extends Controller
             if (count($relatedProjects) >= 3) break;
         }
 
+        $lang = get_current_lang();
+        $title = $project['title_' . $lang] ?: $project['title_en'];
+        $summary = $project['short_description_' . $lang] ?: $project['short_description_en'];
+        $url = site_url('/projects/' . $project['slug']);
+        $seo = [
+            'title' => ($project['seo_title_' . $lang] ?? '') ?: $title . ' — ' . translate('seo_case_study') . ' | Omar Elsayed',
+            'description' => ($project['seo_description_' . $lang] ?? '') ?: mb_substr($summary, 0, 160),
+            'image' => $project['thumbnail'] ?: '/assets/images/brand/og-image.jpg',
+            'type' => 'article',
+            'jsonld' => [
+                ['@type' => 'CreativeWork', 'name' => $title, 'description' => $summary, 'url' => $url,
+                 'image' => site_url($project['thumbnail'] ?: '/assets/images/brand/og-image.jpg'),
+                 'author' => ['@id' => site_url('/#person')], 'inLanguage' => $lang,
+                 'keywords' => implode(', ', array_column($project['technologies'] ?? [], 'name'))],
+                ['@type' => 'BreadcrumbList', 'itemListElement' => [
+                    ['@type' => 'ListItem', 'position' => 1, 'name' => translate('nav_home'), 'item' => site_url('/')],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => translate('nav_projects'), 'item' => site_url('/projects')],
+                    ['@type' => 'ListItem', 'position' => 3, 'name' => $title, 'item' => $url],
+                ]],
+            ],
+        ];
+
         $this->render('project-detail', [
             'title_key' => 'nav_projects',
             'active_page' => 'projects',
+            'seo' => $seo,
             'project' => $project,
             'relatedProjects' => $relatedProjects
         ]);

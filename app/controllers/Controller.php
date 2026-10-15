@@ -17,8 +17,9 @@ class Controller
 
         }
         
-        $referrer = $_SERVER['HTTP_REFERER'] ?? '/';
-        header("Location: $referrer");
+        // Back to the same page on this site (never to another host)
+        $path = parse_url($_SERVER['HTTP_REFERER'] ?? '/', PHP_URL_PATH) ?: '/';
+        header('Location: /' . ltrim($path, '/'));
         exit;
     }
 

@@ -3,14 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Omar Elsayed — Software Engineer & Full-Stack Developer. Creating innovative and scalable web applications.">
-    <title><?= translate($title_key ?? 'nav_home') ?> | <?= translate('hero_name') ?></title>
+<?php
+    // ── SEO: pages may pass $seo = [title, description, image, type, noindex, jsonld] ──
+    $seo = $seo ?? [];
+    $seoLang = get_current_lang();
+    $seoPage = $active_page ?? 'home';
+    $seoTitle = $seo['title'] ?? translate("seo_title_$seoPage");
+    $seoDesc = $seo['description'] ?? translate("seo_desc_$seoPage");
+    $seoImage = site_url($seo['image'] ?? '/assets/images/brand/og-image.jpg');
+    $seoUrl = page_url($seoLang);
+    $person = [
+        '@type' => 'Person', '@id' => site_url('/#person'), 'name' => 'Omar Elsayed', 'url' => site_url('/'),
+        'image' => site_url('/assets/images/hero_portrait.webp'),
+        'jobTitle' => 'Software Engineer · AI Systems & Automation',
+        'worksFor' => ['@type' => 'Organization', 'name' => 'SeroEvents UAE', 'url' => 'https://seroevents.com'],
+        'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Dubai', 'addressCountry' => 'AE'],
+        'alumniOf' => ['@type' => 'CollegeOrUniversity', 'name' => 'Misr University for Science and Technology'],
+        'knowsLanguage' => ['ar', 'en'],
+        'knowsAbout' => ['Software engineering', 'AI systems', 'Automation', 'PHP', 'Laravel', 'JavaScript', 'React', 'TypeScript', 'MySQL', 'Docker'],
+        'sameAs' => ['https://' . translate('contact_github'), 'https://' . translate('contact_linkedin')],
+    ];
+    $jsonld = ['@context' => 'https://schema.org', '@graph' => array_merge([
+        $person,
+        ['@type' => 'WebSite', '@id' => site_url('/#website'), 'url' => site_url('/'), 'name' => 'Omar Elsayed',
+         'inLanguage' => ['en', 'ar'], 'publisher' => ['@id' => site_url('/#person')]],
+    ], $seo['jsonld'] ?? [])];
+    ?>
+    <title><?= htmlspecialchars($seoTitle) ?></title>
+    <meta name="description" content="<?= htmlspecialchars($seoDesc) ?>">
+    <?php if (!empty($seo['noindex'])): ?>
+        <meta name="robots" content="noindex">
+    <?php else: ?>
+        <link rel="canonical" href="<?= htmlspecialchars($seoUrl) ?>">
+        <link rel="alternate" hreflang="en" href="<?= htmlspecialchars(page_url('en')) ?>">
+        <link rel="alternate" hreflang="ar" href="<?= htmlspecialchars(page_url('ar')) ?>">
+        <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars(page_url('en')) ?>">
+    <?php endif; ?>
+    <meta name="theme-color" content="#121214">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta property="og:image" content="<?= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . htmlspecialchars($_SERVER['HTTP_HOST'] ?? 'elsayedomar.com') ?>/assets/images/brand/og-image.jpg">
+    <meta property="og:type" content="<?= htmlspecialchars($seo['type'] ?? 'website') ?>">
+    <meta property="og:site_name" content="Omar Elsayed">
+    <meta property="og:title" content="<?= htmlspecialchars($seoTitle) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($seoDesc) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($seoUrl) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($seoImage) ?>">
+    <meta property="og:locale" content="<?= $seoLang === 'ar' ? 'ar_AE' : 'en_US' ?>">
+    <meta property="og:locale:alternate" content="<?= $seoLang === 'ar' ? 'en_US' : 'ar_AE' ?>">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($seoTitle) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($seoDesc) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($seoImage) ?>">
+    <script type="application/ld+json"><?= json_encode($jsonld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

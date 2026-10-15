@@ -8,6 +8,7 @@ $_SESSION['admin_editor_active'] = true;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <title>Visual Editor - Portfolio CMS</title>
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <style>

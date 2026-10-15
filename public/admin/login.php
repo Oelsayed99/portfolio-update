@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <title>Admin Login</title>
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="stylesheet" href="/assets/css/admin.css">

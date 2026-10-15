@@ -38,6 +38,12 @@ session_start();
 // Include core files
 require_once APP_PATH . '/database.php';
 require_once APP_PATH . '/helpers.php';
+
+// A ?lang= link (e.g. from search results) also becomes the visitor's saved language
+if (in_array($_GET['lang'] ?? '', ['en', 'ar'], true) && ($_SESSION['lang'] ?? '') !== $_GET['lang']) {
+    $_SESSION['lang'] = $_GET['lang'];
+    setcookie('lang', $_GET['lang'], ['expires' => time() + 86400 * 365, 'path' => '/', 'samesite' => 'Lax']);
+}
 if (file_exists(BASE_PATH . '/vendor/autoload.php')) {
     require_once BASE_PATH . '/vendor/autoload.php';
 }
@@ -63,6 +69,7 @@ $router->add('projects', 'app\controllers\ProjectController', 'index');
 $router->add('projects/:slug', 'app\controllers\ProjectController', 'detail');
 $router->add('blog', 'app\controllers\BlogController', 'index');
 $router->add('services', 'app\controllers\ServicesController', 'index');
+$router->add('sitemap.xml', 'app\controllers\SitemapController', 'index');
 $router->add('contact', 'app\controllers\ContactController', 'index');
 $router->add('contact/submit', 'app\controllers\ContactController', 'submit');
 $router->add('lang', 'app\controllers\Controller', 'switchLang');

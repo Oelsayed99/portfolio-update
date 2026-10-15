@@ -40,22 +40,28 @@ class Router
                         call_user_func_array([$controller, $action], $matches);
                         return;
                     } else {
-                        $this->abort(404, "Action '$action' not found in controller '$controllerName'");
+                        self::abort(404, "Action '$action' not found in controller '$controllerName'");
                     }
                 } else {
-                    $this->abort(404, "Controller '$controllerName' not found");
+                    self::abort(404, "Controller '$controllerName' not found");
                 }
             }
         }
 
-        $this->abort(404, "Route '$url' not found");
+        self::abort(404, "Route '$url' not found");
     }
 
-    protected function abort($code, $message = "")
+    /**
+     * Not-found page. $message is for logs only: it can contain the requested URL,
+     * so it is never echoed into the page.
+     */
+    public static function abort($code = 404, $message = "")
     {
         http_response_code($code);
-        echo "<h1>$code Error</h1>";
-        echo "<p>$message</p>";
+        if ($message) error_log("[$code] $message");
+        $active_page = '404';
+        $seo = ['noindex' => true];
+        require VIEW_PATH . '/404.php';
         exit;
     }
 }

@@ -42,12 +42,13 @@ if (!function_exists('handle_upload')) {
 }
 
 function admin_header($title = "Dashboard", $activeLink = "dashboard") {
-    $lang = $_SESSION['lang'] ?? 'en';
+    $lang = get_current_lang();
     ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= htmlspecialchars($title) ?> - Portfolio CMS</title>
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">

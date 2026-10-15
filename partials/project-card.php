@@ -19,7 +19,7 @@ $hasImage = $variant !== 'compact';
          data-company="<?= htmlspecialchars(strtolower($p['company_en'] ?? '')) ?>">
     <?php if ($hasImage): ?>
         <div class="project-card-image">
-            <img src="<?= htmlspecialchars($p['thumbnail'] ?: '/assets/images/default_project.png') ?>" alt="" loading="lazy">
+            <img src="<?= htmlspecialchars($p['thumbnail'] ?: '/assets/images/default_project.png') ?>" alt="<?= htmlspecialchars($title) ?>" loading="lazy">
             <span class="badge-status-wrap">
                 <span class="badge-status-dot" style="background: <?= htmlspecialchars($p['status_color'] ?: '#fff') ?>"></span>
                 <?= htmlspecialchars($p['status_name_' . $lang]) ?>
