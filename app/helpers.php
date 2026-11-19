@@ -191,7 +191,8 @@ function send_contact_email($name, $email, $message) {
         $mail->Port       = $_ENV['SMTP_PORT'] ?? 587;
 
         // Recipients
-        $to = $_ENV['SMTP_USER'] ?? 'om.he.els@gmail.com';
+        // CONTACT_TO: where form messages go (SMTP_USER may be a relay login like "resend", not an inbox)
+        $to = $_ENV['CONTACT_TO'] ?? $_ENV['SMTP_USER'] ?? 'om.he.els@gmail.com';
         $mail->setFrom($_ENV['SMTP_FROM'] ?? 'om.he.els@gmail.com', 'Portfolio Contact');
         $mail->addAddress($to);
         $mail->addReplyTo($email, $name);
